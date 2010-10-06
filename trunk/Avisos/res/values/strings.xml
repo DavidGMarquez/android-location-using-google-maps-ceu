@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ProyectoMain!</string>
+    <string name="app_name">Avisos</string>
+         <string name="tipo_prompt">Tipo:</string>
+       <string-array name="tipo_array">
+        <item>Control</item>
+        <item>Radar</item>
+        <item>Atasco</item>
+        <item>Obras</item>
+        <item>Otros</item>
+    </string-array>
+</resources>
