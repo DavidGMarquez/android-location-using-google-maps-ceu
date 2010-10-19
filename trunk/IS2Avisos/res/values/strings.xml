@@ -10,4 +10,6 @@
         <item>Obras</item>
         <item>Otros</item>
     </string-array>
+    <string name="app_androide">Alta Vehiculo</string>
+ 
 </resources>
