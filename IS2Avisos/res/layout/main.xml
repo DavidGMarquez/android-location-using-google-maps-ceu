@@ -18,9 +18,11 @@
 			android:layout_height="fill_parent"
 			android:padding="5dp">
         	
-
+            
       		<include layout="@layout/form_crearaviso"/>
-      		<include layout="@layout/lista_avisos"/>
+      		<include layout="@layout/form_alta_ve"/>
+      		<include layout="@layout/lista_avisos"/>     		
+      		
       		
       		<!--  Incluir demás layouts para los otros tabs... -->
    

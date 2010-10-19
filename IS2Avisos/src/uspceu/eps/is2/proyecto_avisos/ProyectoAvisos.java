@@ -64,6 +64,14 @@ public class ProyectoAvisos extends ListActivity {
         spec.setIndicator("Crear Avisos",getResources().getDrawable(R.drawable.ic_tab_crear));
         spec.setContent(R.id.formcrear);
         tabHost.addTab(spec);
+   
+        
+        spec=tabHost.newTabSpec("Alta Veiculo");
+        spec.setIndicator("Alta Veiculo",getResources().getDrawable(R.drawable.car2));
+        spec.setContent(R.id.formalta);       
+       tabHost.addTab(spec);
+        
+        
         
         spec=tabHost.newTabSpec("Ver Avisos");
         spec.setIndicator("Ver Avisos",getResources().getDrawable(R.drawable.ic_tab_ver));
@@ -77,6 +85,11 @@ public class ProyectoAvisos extends ListActivity {
 //        tabHost.addTab(spec);
         
         /* Pestaña que se visualizará al iniciar la aplicación */
+   
+        
+        
+        
+        
         tabHost.setCurrentTab(1);
         
     }
