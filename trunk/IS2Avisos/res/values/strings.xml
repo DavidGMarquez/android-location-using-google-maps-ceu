@@ -10,6 +10,6 @@
         <item>Obras</item>
         <item>Otros</item>
     </string-array>
-    <string name="app_androide">Alta Vehiculo</string>
- 
+    <string name=".IndentificarUsuario">Identificar Usuario</string>
+    <string name="btn_showMessage">Identificarse</string>
 </resources>
