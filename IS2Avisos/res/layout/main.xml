@@ -22,6 +22,7 @@
       		<include layout="@layout/form_crearaviso"/>
       		<include layout="@layout/form_alta_ve"/>
       		<include layout="@layout/lista_avisos"/>     		
+      		<include layout="@layout/form_identificar_usuario"/>
       		
       		
       		<!--  Incluir demás layouts para los otros tabs... -->
