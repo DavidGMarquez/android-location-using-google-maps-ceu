@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class CrearAvisos extends Activity {
+public class CrearAvisos extends AplicacionMain {
 	
 	private FormularioCrearAviso form;
 	
@@ -51,7 +51,8 @@ public class CrearAvisos extends Activity {
 				
 				/* Crear aviso a partir de lo introducido en el formulario */
 				Aviso a=form.obtenerDatosFormulario(usu, pm);
-				guardarAviso(a);
+				if(form.getEditname().getText().length()!=0)
+					guardarAviso(a);
 				
 				/* Pone los campos en blanco (quitar??) */
 				form.vaciarCampos();
@@ -77,34 +78,11 @@ public class CrearAvisos extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.app_menu, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-        case R.id.ver_avisos:
-        	
-            this.startActivity(new Intent().setClass(this, VerAvisos.class));
-            return true;
-        case R.id.crear_avisos:
-        	
-        	this.startActivity(new Intent().setClass(this, CrearAvisos.class));
-        	return true;
-        
-        case R.id.alta_vehiculo:
-        	this.startActivity(new Intent().setClass(this, AltaVehiculo.class));
-        	return true;
-        	
-      /*case R.id.ID_ACTIVIDAD:
-        	this.startActivity(new Intent().setClass(this, NOMBRE_ACTIVIDAD.class));
-        	return true;
-      */        	
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
     }
 }

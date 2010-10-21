@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
  
- public class AltaVehiculo extends Activity {
+ public class AltaVehiculo extends AplicacionMain {
   
      //private EditText txtMessage;
      private EditText id_vehiculo;
@@ -126,35 +126,12 @@ import android.widget.Toast;
  
  @Override
  public boolean onCreateOptionsMenu(Menu menu) {
-     MenuInflater inflater = getMenuInflater();
-     inflater.inflate(R.menu.app_menu, menu);
-     return true;
+     return super.onCreateOptionsMenu(menu);
  }
  
  @Override
  public boolean onOptionsItemSelected(MenuItem item) {
-     // Handle item selection
-     switch (item.getItemId()) {
-     case R.id.ver_avisos:
-     	
-         this.startActivity(new Intent().setClass(this, VerAvisos.class));
-         return true;
-     case R.id.crear_avisos:
-     	
-     	this.startActivity(new Intent().setClass(this, CrearAvisos.class));
-     	return true;
-     
-     case R.id.alta_vehiculo:
-     	this.startActivity(new Intent().setClass(this, AltaVehiculo.class));
-     	return true;
-     	
-   /*case R.id.ID_ACTIVIDAD:
-     	this.startActivity(new Intent().setClass(this, NOMBRE_ACTIVIDAD.class));
-     	return true;
-   */        	
-     default:
-         return super.onOptionsItemSelected(item);
-     }
+     return super.onOptionsItemSelected(item);
  }
  }	//}
 
