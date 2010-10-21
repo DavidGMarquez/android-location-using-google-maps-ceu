@@ -53,6 +53,9 @@ public class CrearAvisos extends AplicacionMain {
 				Aviso a=form.obtenerDatosFormulario(usu, pm);
 				if(form.getEditname().getText().length()!=0)
 					guardarAviso(a);
+				else{
+					Toast.makeText(CrearAvisos.this,"Introduzca el nombre del aviso",Toast.LENGTH_LONG).show();
+				}
 				
 				/* Pone los campos en blanco (quitar??) */
 				form.vaciarCampos();
