@@ -18,6 +18,10 @@
           android:icon="@drawable/car2"
           android:title="Mapa Avisos" />
           
+    <item android:id="@+id/Identificacion"
+          android:icon="@drawable/usupng"
+          android:title="Identificar Usuario" />
+          
 <!--    <item android:id="@+id/identificarse"-->
 <!--          android:icon="@drawable/car2"-->
 <!--          android:title="Identificarse" />-->
