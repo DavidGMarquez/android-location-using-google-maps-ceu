@@ -74,8 +74,10 @@ public class Identificacion extends Activity {
 		FileOutputStream fos;
 		try {
 			fos = openFileOutput("usuarios_guardados", Context.MODE_APPEND);
-			fos.write((u.getNombre()+"\n").getBytes());
+			fos.write((u.getNombre()+" "+u.getPassword()+"\n").getBytes());
 			fos.close();
+			String s = "usuario: "+u.getNombre().toString()+"\npassword: "+ u.getPassword().toString() + "\nalmacenado!";
+			//Toast.makeText(Identificacion.this,s,Toast.LENGTH_LONG);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

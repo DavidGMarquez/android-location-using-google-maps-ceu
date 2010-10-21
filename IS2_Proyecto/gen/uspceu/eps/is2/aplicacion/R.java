@@ -16,8 +16,10 @@ public final class R {
         public static final int ic_ver=0x7f020002;
         public static final int icon=0x7f020003;
         public static final int interior2=0x7f020004;
+        public static final int usupng=0x7f020005;
     }
     public static final class id {
+        public static final int Identificacion=0x7f060015;
         public static final int alta_vehiculo=0x7f060014;
         public static final int btn_showMessage=0x7f060003;
         public static final int container=0x7f06000e;
