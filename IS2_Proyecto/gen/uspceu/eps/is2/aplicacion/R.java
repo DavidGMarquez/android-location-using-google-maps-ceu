@@ -18,38 +18,44 @@ public final class R {
         public static final int interior2=0x7f020004;
     }
     public static final class id {
-        public static final int alta_vehiculo=0x7f060011;
+        public static final int alta_vehiculo=0x7f060014;
         public static final int btn_showMessage=0x7f060003;
-        public static final int container=0x7f06000b;
-        public static final int crear_avisos=0x7f06000f;
+        public static final int container=0x7f06000e;
+        public static final int crear_avisos=0x7f060012;
         public static final int descprompt=0x7f060007;
         public static final int editdesc=0x7f060008;
         public static final int editname=0x7f060006;
         public static final int formalta=0x7f060000;
         public static final int formcrear=0x7f060004;
+        public static final int formidentificacion=0x7f06000b;
+        public static final int id_pass=0x7f06000d;
+        public static final int id_usu=0x7f06000c;
         public static final int id_vehiculo=0x7f060002;
         public static final int label=0x7f060001;
-        public static final int mapa=0x7f06000c;
+        public static final int mapa=0x7f06000f;
         public static final int nameprompt=0x7f060005;
         public static final int save=0x7f06000a;
         public static final int sep=0x7f060009;
-        public static final int ver_avisos=0x7f060010;
-        public static final int verav=0x7f06000e;
-        public static final int zoom_holder=0x7f06000d;
+        public static final int ver_avisos=0x7f060013;
+        public static final int verav=0x7f060011;
+        public static final int zoom_holder=0x7f060010;
     }
     public static final class layout {
         public static final int form_altavehiculo=0x7f030000;
         public static final int form_crearaviso=0x7f030001;
-        public static final int lista_avisos=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int mapa=0x7f030004;
-        public static final int vista_lista=0x7f030005;
+        public static final int form_identificar_usuario=0x7f030002;
+        public static final int lista_avisos=0x7f030003;
+        public static final int main=0x7f030004;
+        public static final int mapa=0x7f030005;
+        public static final int vista_lista=0x7f030006;
     }
     public static final class menu {
         public static final int app_menu=0x7f050000;
     }
     public static final class string {
+        public static final int _IndentificarUsuario=0x7f040003;
         public static final int app_name=0x7f040001;
+        public static final int btn_showMessage=0x7f040004;
         public static final int hello=0x7f040000;
         public static final int noavisos=0x7f040002;
     }
