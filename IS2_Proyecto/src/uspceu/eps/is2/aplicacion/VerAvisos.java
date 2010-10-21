@@ -61,6 +61,10 @@ public class VerAvisos extends ListActivity {
         	this.startActivity(new Intent().setClass(this, AltaVehiculo.class));
         	return true;
         	
+        case R.id.mapa:
+        	this.startActivity(new Intent().setClass(this, HolaMundo1.class));
+        	return true;
+        	
       /*case R.id.ID_ACTIVIDAD:
         	this.startActivity(new Intent().setClass(this, NOMBRE_ACTIVIDAD.class));
         	return true;
