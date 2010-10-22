@@ -88,6 +88,10 @@ public class HolaMundo1 extends MapActivity
 	        	this.startActivity(new Intent().setClass(this, HolaMundo1.class));
 	        	return true;
 	        	
+	        case R.id.Identificacion:
+	        	this.startActivity(new Intent().setClass(this, Identificacion.class));
+	        	return true;
+	        	
 	      /*case R.id.ID_ACTIVIDAD:
 	        	this.startActivity(new Intent().setClass(this, NOMBRE_ACTIVIDAD.class));
 	        	return true;
