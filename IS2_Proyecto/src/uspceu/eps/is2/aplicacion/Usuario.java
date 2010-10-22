@@ -2,10 +2,7 @@ package uspceu.eps.is2.aplicacion;
 
 public class Usuario {
 	private String nombre;
-	private String password;
-	
-	
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -14,34 +11,13 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public Usuario(String nombre, String pass) {
+	public Usuario(String nombre) {
 		this.nombre = nombre;
-		this.password = pass;
-	}
-	
-	public Usuario(String name){
-		this.nombre = name;
 	}
 
-    @Override
+	@Override
 	public String toString() {
 		return nombre;
-	}
-	
-	
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-	
-	public String toCompleto() {		
-		return "Usuario: "+ nombre + "\n" +
-				"pass: " + password + "\n" ;
-				
 	}
 	
 }
