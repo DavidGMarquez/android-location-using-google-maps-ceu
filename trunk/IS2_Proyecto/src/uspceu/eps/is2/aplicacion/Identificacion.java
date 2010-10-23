@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Identificacion extends Activity {
+public class Identificacion extends AplicacionMain {
 	  
     private EditText user;
     private EditText passwd;
