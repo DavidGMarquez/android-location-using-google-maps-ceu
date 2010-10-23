@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,38 +24,34 @@ public class Identificacion extends AplicacionMain {
     private EditText user;
     private EditText passwd;
     private Button btnShowMessage;
+    final ArrayList<Usuario> listaUsus = new ArrayList<Usuario>();
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_identificar_usuario);
         
+        cargarUsuarios(listaUsus);
+        //cargarUsuariosPredefinidos();
+        
+        //avisa si no existen usuarios almacenados
+       /* if(listaUsus.isEmpty()){
+    		Toast.makeText(Identificacion.this, R.string.nousuarios,Toast.LENGTH_LONG).show();
+    	}*/
+        
         user = (EditText) findViewById(R.id.id_usu); 
         passwd = (EditText) findViewById(R.id.id_pass); 
         btnShowMessage = (Button) findViewById(R.id.btn_showMessage);
         btnShowMessage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String str = "usuario: "+user.getText().toString()+"\npassword: "+ passwd.getText() + "\nIdentificado!";
-                Toast.makeText(Identificacion.this, str, Toast.LENGTH_LONG).show();
+                //String str = "usuario: "+user.getText().toString()+"\npassword: "+ passwd.getText() + "\nIdentificado!";
+                //Toast.makeText(Identificacion.this, str, Toast.LENGTH_LONG).show();
                 
                 //creo un usuario con los datos recibidos
                Usuario usu=new Usuario(user.getText().toString(),passwd.getText().toString());
                 
                guardarUsuario(usu);
                
-               
-              /* 
-               ArrayList<Usuario> listaUsus = new ArrayList<Usuario>();
-               getListaUsuarios(listaUsus);
-               Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
-               Toast.makeText(getBaseContext(), listaUsus.get(0).toCompleto(),
-						Toast.LENGTH_LONG).show();
-               */
-               
-               
-            //String a="YEEEEAH!!!"+listaUsus.get(1).getNombre().toString()+ " oooo "+listaUsus.get(1).getPassword().toString();
-            //Toast.makeText(getBaseContext(), a, Toast.LENGTH_LONG).show();
-                
           /*
            * 
                  redirección a la clase "ProyectoAvisos" tras la identificación del usuario*/
@@ -78,8 +75,9 @@ public class Identificacion extends AplicacionMain {
 			fos = openFileOutput("usuarios_guardados", Context.MODE_APPEND);
 			fos.write((u.getNombre()+" "+u.getPassword()+"\n").getBytes());
 			fos.close();
+			
 			String s = "usuario: "+u.getNombre().toString()+"\npassword: "+ u.getPassword().toString() + "\nalmacenado!";
-			//Toast.makeText(Identificacion.this,s,Toast.LENGTH_LONG);
+			Toast.makeText(Identificacion.this,s,Toast.LENGTH_LONG).show();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,9 +85,9 @@ public class Identificacion extends AplicacionMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Toast.makeText(Identificacion.this,"Usuario Guardado",Toast.LENGTH_LONG).show();
+		//Toast.makeText(Identificacion.this,"Usuario Guardado",Toast.LENGTH_LONG).show();
 	}
-    
+    /*
     public void getListaUsuarios(ArrayList<Usuario> usu) {
 
 		int numlins = -1;
@@ -104,17 +102,17 @@ public class Identificacion extends AplicacionMain {
 				numlins++;
 				aux = br.readLine();
 				if (aux != null){
-				//	stringarray.add(aux + '\n');
+				stringarray.add(aux + '\n');
 	            //Toast.makeText(getBaseContext(),aux, Toast.LENGTH_LONG).show();
 					Usuario u = new Usuario("","");
 					int ini=0, fin=0;
 					
 					u.setNombre(aux);
-				/*	ini=aux.indexOf(" ",0)+1;
+					ini=aux.indexOf(" ",0)+1;
 					fin=aux.indexOf("\n",ini);
 					u.setNombre(aux.substring(0,ini));
 					u.setPassword(aux.substring(ini,fin));	            
-					*/
+					
 					usu.add(u);
 					
 				}
@@ -142,7 +140,78 @@ public class Identificacion extends AplicacionMain {
 			}
 		}
 
+	}*/
+    
+    public void cargarUsuarios(ArrayList<Usuario> u) {
+
+		int numlins = -1;
+		String aux = "";
+		ArrayList<String> stringarray = new ArrayList<String>();
+		
+		
+		/* Lee los Avisos del fichero */
+		try {
+			InputStreamReader isr = new InputStreamReader(
+					openFileInput("usuarios_guardados"));
+			BufferedReader br = new BufferedReader(isr);
+			do {
+				numlins++;
+				aux = br.readLine();
+				if (aux != null)
+					stringarray.add(aux + '\n');
+					Toast.makeText(getBaseContext(),aux, Toast.LENGTH_LONG).show();
+			} while (aux != null);
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		/* Guarda los Avisos en el array */
+		int i = 0, ai = 0;
+		aux = "";
+		for (i = 0; i < numlins; i++) {
+			aux += stringarray.get(i);
+			if ((i + 1) % 8 == 0) {
+				ai++;
+				Usuario usu = new Usuario(aux);
+				u.add(usu);
+				aux = "";
+			}
+		}
 	}
+    
+private void cargarUsuariosPredefinidos() {
+		
+		Usuario u1 = new Usuario("Kik","10");
+		Usuario u2 = new Usuario("Dolfi","11");
+		Usuario u3 = new Usuario("Roman","18");
+		Usuario u4 = new Usuario("Caye","13");
+		Usuario u5 = new Usuario("Cohe","30");
+		
+		
+		FileOutputStream fos;
+		try {
+			fos = openFileOutput("usuarios_guardados", Context.MODE_PRIVATE);
+			fos.write(("Usuario: " + u1.getNombre() + "\t" + u1.getPassword()
+					+ "\n" + u2.getNombre() + "\t" + u2.getPassword() + "\n"
+					+ u3.getNombre() + "\t" + u3.getPassword() + "\n" + u4.getNombre()
+					+ "\t" + u4.getPassword() + "\n" + u5.getNombre()
+					+ "\t" + u5.getPassword() + "\n").getBytes());
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+	}
+
+    
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
