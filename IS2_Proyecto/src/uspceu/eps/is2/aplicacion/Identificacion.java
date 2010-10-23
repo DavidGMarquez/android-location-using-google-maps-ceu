@@ -154,6 +154,7 @@ public class Identificacion extends AplicacionMain {
 			InputStreamReader isr = new InputStreamReader(
 					openFileInput("usuarios_guardados"));
 			BufferedReader br = new BufferedReader(isr);
+			
 			do {
 				numlins++;
 				aux = br.readLine();
