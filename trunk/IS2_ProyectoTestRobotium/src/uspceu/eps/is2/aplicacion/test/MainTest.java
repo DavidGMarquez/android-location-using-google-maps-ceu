@@ -1,8 +1,10 @@
 package uspceu.eps.is2.aplicacion.test;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import uspceu.eps.is2.aplicacion.AplicacionMain;
+import uspceu.eps.is2.aplicacion.Aviso;
 import uspceu.eps.is2.aplicacion.CrearAvisos;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
@@ -88,6 +90,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 		solo.assertCurrentActivity("Expected activity","AltaVehiculo");
 	}
 	
+	/* Comprueba que no se creen avisos sin nombre */
 	public void testAvisoSinNombre() throws Exception{
 		
 		//Comprueba cuántos avisos hay
@@ -97,13 +100,46 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 		
 		//Intenta crear un aviso sin nombre
 		solo.clickOnMenuItem("Crear Aviso");
-		solo.assertCurrentActivity("Expected Activity", "CrearAvisos");
 		solo.clearEditText(0); //Se asegura de que no haya nada en el campo de nombre
 		solo.clickOnButton("Guardar"); //Intenta guardar un aviso vacío
 		
 		//Comprueba que no se haya creado un aviso nuevo
 		solo.clickOnMenuItem("Ver Avisos");
 		assertTrue(items==solo.getCurrentListViews().get(0).getCount());
+	}
+	
+	/* Comprueba que se cree un aviso */
+	public void testAvisoCreado() throws Exception {
+		
+		// Comprueba cuántos avisos hay creados
+		solo.clickOnMenuItem("Ver Avisos");
+		int items = 0;
+		ListView lv = null;
+		if (!solo.getCurrentListViews().isEmpty()) {
+			lv = solo.getCurrentListViews().get(0);
+			items = lv.getCount();
+		}
+
+		// Crea un nuevo aviso
+		java.util.Random r=new Random();
+		String nombre = "AvisoTest"+r.nextInt(99);
+		solo.clickOnMenuItem("Crear Aviso");
+		solo.enterText(0, nombre);
+		solo.clickOnButton("Guardar");
+
+		solo.clickOnMenuItem("Ver Avisos");
+		if (!solo.getCurrentListViews().isEmpty()) {
+			lv = solo.getCurrentListViews().get(0);
+		}
+		
+		// Comprueba que haya un elemento más en la lista
+		assertTrue((items + 1) == lv.getCount());
+		
+		// Recoge el elemento nuevo
+		Aviso a = (Aviso) lv.getItemAtPosition(items);
+		
+		// Comprueba que coincidan los datos
+		assertTrue(a.getNombreAviso().equals(nombre));
 	}
 
 }
