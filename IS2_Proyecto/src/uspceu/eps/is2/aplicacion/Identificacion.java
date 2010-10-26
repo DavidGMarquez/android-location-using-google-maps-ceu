@@ -50,7 +50,7 @@ public class Identificacion extends AplicacionMain {
             	   Usuario usu=new Usuario(user.getText().toString(),passwd.getText().toString());
             	   
             	   
-            	   if(!usu.esUsuVacio()){
+            	   if(!usu.esUsuIncorrecto()){
             		   guardarUsuario(usu);
             	       /*redirección a la clase "ProyectoMain" tras la identificación del usuario*/
             	       Intent intent =new Intent();

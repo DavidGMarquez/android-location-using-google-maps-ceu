@@ -44,7 +44,7 @@ public class Usuario {
 				
 	}
 	
-	public boolean esUsuVacio(){
+	public boolean esUsuIncorrecto(){
 		if (this.nombre==null){
 			return true;
 			}
@@ -57,6 +57,14 @@ public class Usuario {
 		if(this.password.equals("")||(this.password.contains(" "))){
 			return true;
 		}
+		if((this.nombre.length()<6)||(this.password.length()<6)){
+			return true;
+		}
+		if((this.nombre.length()>20)||(this.password.length()>20)){
+			return true;
+		}
+		
+		
 		return false;
 	}
 	
