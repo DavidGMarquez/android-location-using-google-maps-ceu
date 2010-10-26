@@ -58,7 +58,7 @@ public class Identificacion extends AplicacionMain {
                        startActivity(intent);
                        finish();}
                else{
-            	   Toast.makeText(Identificacion.this, "No se pueden introducir campos vacios", Toast.LENGTH_LONG);
+            	   Toast.makeText(Identificacion.this, R.string.nousuarios, Toast.LENGTH_LONG).show();
                }
                
                     
