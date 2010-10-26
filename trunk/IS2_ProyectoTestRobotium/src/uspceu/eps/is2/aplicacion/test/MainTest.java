@@ -3,8 +3,10 @@ package uspceu.eps.is2.aplicacion.test;
 import java.util.ArrayList;
 
 import uspceu.eps.is2.aplicacion.AplicacionMain;
+import uspceu.eps.is2.aplicacion.CrearAvisos;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jayway.android.robotium.solo.Solo;
@@ -84,6 +86,24 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 		solo.clickOnMenuItem("Alta Vehiculo");
 		assertTrue(solo.searchText("Introducir datos"));
 		solo.assertCurrentActivity("Expected activity","AltaVehiculo");
+	}
+	
+	public void testAvisoSinNombre() throws Exception{
+		
+		//Comprueba cuántos avisos hay
+		solo.clickOnMenuItem("Ver Avisos");
+		ListView lv=solo.getCurrentListViews().get(0);
+		int items=lv.getCount(); //Numero de avisos creados
+		
+		//Intenta crear un aviso sin nombre
+		solo.clickOnMenuItem("Crear Aviso");
+		solo.assertCurrentActivity("Expected Activity", "CrearAvisos");
+		solo.clearEditText(0); //Se asegura de que no haya nada en el campo de nombre
+		solo.clickOnButton("Guardar"); //Intenta guardar un aviso vacío
+		
+		//Comprueba que no se haya creado un aviso nuevo
+		solo.clickOnMenuItem("Ver Avisos");
+		assertTrue(items==solo.getCurrentListViews().get(0).getCount());
 	}
 
 }
