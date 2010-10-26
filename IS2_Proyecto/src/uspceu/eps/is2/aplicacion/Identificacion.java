@@ -44,26 +44,24 @@ public class Identificacion extends AplicacionMain {
         btnShowMessage = (Button) findViewById(R.id.btn_showMessage);
         btnShowMessage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //String str = "usuario: "+user.getText().toString()+"\npassword: "+ passwd.getText() + "\nIdentificado!";
-                //Toast.makeText(Identificacion.this, str, Toast.LENGTH_LONG).show();
-                
+                                
+            	//if((user.getText().toString()!= null)&&(user.getText().toString().equals(""))){
                 //creo un usuario con los datos recibidos
-               Usuario usu=new Usuario(user.getText().toString(),passwd.getText().toString());
-                
-               guardarUsuario(usu);
+            	   Usuario usu=new Usuario(user.getText().toString(),passwd.getText().toString());
+            	   
+            	   
+            	   if(!usu.esUsuVacio()){
+            		   guardarUsuario(usu);
+            	       /*redirección a la clase "ProyectoMain" tras la identificación del usuario*/
+            	       Intent intent =new Intent();
+                       intent.setClass (Identificacion.this, AplicacionMain.class);
+                       startActivity(intent);
+                       finish();}
+               else{
+            	   Toast.makeText(Identificacion.this, "No se pueden introducir campos vacios", Toast.LENGTH_LONG);
+               }
                
-          /*
-           * 
-                 redirección a la clase "ProyectoAvisos" tras la identificación del usuario*/
-           
-                Intent intent =new Intent();
-               intent.setClass (Identificacion.this, AplicacionMain.class);
-                startActivity(intent);
-              finish();
-           
-                
-           
-                
+                    
             }
         });      
     
