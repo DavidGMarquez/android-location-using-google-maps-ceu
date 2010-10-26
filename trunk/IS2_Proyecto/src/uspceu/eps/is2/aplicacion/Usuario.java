@@ -48,7 +48,13 @@ public class Usuario {
 		if (this.nombre==null){
 			return true;
 			}
-		if (this.nombre.equals("")){
+		if (this.nombre.equals("")||(this.nombre.contains(" "))){
+			return true;
+		}
+		if (this.password==null){
+			return true;
+		}
+		if(this.password.equals("")||(this.password.contains(" "))){
 			return true;
 		}
 		return false;
