@@ -3,7 +3,7 @@
     <string name="hello">Hello World, AplicacionMain!</string>
     <string name="app_name">Proyecto IS2</string>
     <string name="noavisos">No existen avisos creados</string>
-    <string name="nousuarios">No existen usuarios almacenados</string>
+    <string name="nousuarios">Sin espacios,\nsin enters,\nentre 6 y 20 caracteres...\n...por favor</string>
     <string name=".IndentificarUsuario">Identificar Usuario</string>
     <string name="btn_showMessage">Identificarse</string>
 </resources>
