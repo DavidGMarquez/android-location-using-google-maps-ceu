@@ -44,4 +44,14 @@ public class Usuario {
 				
 	}
 	
+	public boolean esUsuVacio(){
+		if (this.nombre==null){
+			return true;
+			}
+		if (this.nombre.equals("")){
+			return true;
+		}
+		return false;
+	}
+	
 }
