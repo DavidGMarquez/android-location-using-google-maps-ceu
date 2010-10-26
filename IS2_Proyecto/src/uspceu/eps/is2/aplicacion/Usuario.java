@@ -45,6 +45,8 @@ public class Usuario {
 	}
 	
 	public boolean esUsuIncorrecto(){
+		
+		//si usuario y contraseña vacios
 		if (this.nombre==null){
 			return true;
 			}
@@ -57,13 +59,17 @@ public class Usuario {
 		if(this.password.equals("")||(this.password.contains(" "))){
 			return true;
 		}
+		//si usu y pass no tienen entre 6 y 20 caracteres
 		if((this.nombre.length()<6)||(this.password.length()<6)){
 			return true;
 		}
 		if((this.nombre.length()>20)||(this.password.length()>20)){
 			return true;
 		}
-		
+		//si metemos un enter
+		if (this.nombre.contains("\n")){
+			return true;
+		}
 		
 		return false;
 	}
