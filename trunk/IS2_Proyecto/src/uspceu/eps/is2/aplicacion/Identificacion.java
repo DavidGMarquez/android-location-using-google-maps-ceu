@@ -70,7 +70,7 @@ public class Identificacion extends AplicacionMain {
     public void guardarUsuario(Usuario u){
 		FileOutputStream fos;
 		try {
-			fos = openFileOutput("usuarios_guardados", Context.MODE_APPEND);
+			fos = openFileOutput("usuarios_guardado", Context.MODE_APPEND);
 			fos.write((u.getNombre()+" "+u.getPassword()+"\n").getBytes());
 			fos.close();
 			
@@ -150,7 +150,7 @@ public class Identificacion extends AplicacionMain {
 		/* Lee los Avisos del fichero */
 		try {
 			InputStreamReader isr = new InputStreamReader(
-					openFileInput("usuarios_guardados"));
+					openFileInput("usuarios_guardado"));
 			BufferedReader br = new BufferedReader(isr);
 			
 			do {
