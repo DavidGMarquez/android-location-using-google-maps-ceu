@@ -58,4 +58,5 @@
     </application>
 
 
+<uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
 </manifest> 
