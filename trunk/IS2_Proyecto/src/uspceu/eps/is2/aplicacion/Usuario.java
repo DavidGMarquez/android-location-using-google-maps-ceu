@@ -66,11 +66,7 @@ public class Usuario {
 		if((this.nombre.length()>20)||(this.password.length()>20)){
 			return true;
 		}
-		//si metemos un enter
-		if (this.nombre.contains("\n")){
-			return true;
-		}
-		
+				
 		return false;
 	}
 	
