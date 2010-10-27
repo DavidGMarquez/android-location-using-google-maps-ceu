@@ -3,6 +3,9 @@ package uspceu.eps.is2.aplicacion;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +13,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class AplicacionMain extends Activity {
     /** Called when the activity is first created. */
@@ -17,6 +22,8 @@ public class AplicacionMain extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        TextView tv=(TextView) findViewById(R.id.ppal);
+        tv.append("\nBienvenido, "+this.getEmailUsuario());
         
         if(fileList().length==0){
         	this.crearArchivo("avisos_guardados");
@@ -79,4 +86,13 @@ public class AplicacionMain extends Activity {
 			e.printStackTrace();
 		}
     }
+    
+    public String getEmailUsuario(){
+    	String usuario="Anónimo";
+    	Account[] accounts=AccountManager.get(this).getAccounts();
+    	if(accounts.length>0)
+    		usuario=accounts[0].name;
+    	return usuario;
+    }
+    
   }
