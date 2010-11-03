@@ -17,13 +17,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AplicacionMain extends Activity {
+	protected boolean registrado;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         TextView tv=(TextView) findViewById(R.id.ppal);
-        tv.append("\nBienvenido, "+this.getEmailUsuario());
+        registrado=!(this.getEmailUsuario().equals(""));
+        
+        if (registrado==true)
+        	tv.append("\nBienvenido, "+this.getEmailUsuario());
+        else
+        	tv.setText(R.string.sinregistrar);
+        
         
         if(fileList().length==0){
         	this.crearArchivo("avisos_guardados");
@@ -37,6 +44,14 @@ public class AplicacionMain extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.app_menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {   super.onPrepareOptionsMenu(menu);
+    	if(!registrado)
+    		menu.clear();
         return true;
     }
     
@@ -88,8 +103,8 @@ public class AplicacionMain extends Activity {
     }
     
     public String getEmailUsuario(){
-    	String usuario="Anónimo";
-    	Account[] accounts=AccountManager.get(this).getAccounts();
+    	String usuario="";
+    	Account[] accounts=AccountManager.get(this).getAccountsByType("com.google");
     	if(accounts.length>0)
     		usuario=accounts[0].name;
     	return usuario;
