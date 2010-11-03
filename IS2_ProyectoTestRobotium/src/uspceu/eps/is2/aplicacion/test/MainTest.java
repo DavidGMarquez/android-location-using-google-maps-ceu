@@ -108,9 +108,12 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 
 		// Comprueba cuántos avisos hay
 		solo.clickOnMenuItem("Ver Avisos");
-		ListView lv = solo.getCurrentListViews().get(0);
-		int items = lv.getCount(); // Numero de avisos creados
-
+		int items_old=0, items_new=0;
+		ListView lv=null;
+		if (!solo.getCurrentListViews().isEmpty()){
+			lv = solo.getCurrentListViews().get(0);
+			items_old = lv.getCount(); // Numero de avisos creados
+		}
 		// Intenta crear un aviso sin nombre
 		solo.clickOnMenuItem("Crear Aviso");
 		solo.clearEditText(0); // Se asegura de que no haya nada en el campo de
@@ -119,7 +122,11 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 
 		// Comprueba que no se haya creado un aviso nuevo
 		solo.clickOnMenuItem("Ver Avisos");
-		assertTrue(items == solo.getCurrentListViews().get(0).getCount());
+		if (!solo.getCurrentListViews().isEmpty()){
+			lv=solo.getCurrentListViews().get(0);
+			items_new=lv.getCount();
+		}
+		assertTrue(items_old==items_new);
 	}
 
 	/* Comprueba que se cree un aviso */
