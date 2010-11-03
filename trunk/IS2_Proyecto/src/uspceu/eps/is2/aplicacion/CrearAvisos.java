@@ -32,6 +32,7 @@ public class CrearAvisos extends AplicacionMain {
 	
 	public void hacerFormularioCrearAviso()
     {        
+		
         this.form.setEditname((EditText) findViewById(R.id.editname));
         this.form.setEditdesc((EditText) findViewById(R.id.editdesc));
         this.form.setButton((Button) findViewById(R.id.save));
