@@ -22,20 +22,27 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 
 	private Solo solo;
 	private Activity activity;
+	private ArrayList<String> nombreMenus=new ArrayList<String>();
+	private ArrayList<String> nombreActivities=new ArrayList<String>();
 
 	public MainTest() {
 		super("uspceu.eps.is2.aplicacion", AplicacionMain.class);
 	}
 
 	@Override
-	protected void setUp() throws Exception {
-		
-	
-
-		super.setUp();
-		
-		this.activity = this.getActivity();
-		
+	protected void setUp() throws Exception {		
+		super.setUp();		
+		nombreMenus.add("Crear Aviso");
+		nombreMenus.add("Ver Avisos");
+		nombreMenus.add("Alta Vehiculo");
+		nombreMenus.add("Identificar Usuario");
+		nombreMenus.add("Mapa Avisos");		
+		nombreActivities.add("CrearAvisos");
+		nombreActivities.add("VerAvisos");
+		nombreActivities.add("AltaVehiculo");
+		nombreActivities.add("Identificacion");
+		nombreActivities.add("HolaMundo1");
+		this.activity = this.getActivity();		
 		this.solo = new Solo(getInstrumentation(), this.activity);
 		activity.deleteFile("avisos_guardados");
 	}
@@ -56,29 +63,37 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 	 *             Exception
 	 */
 	public void testMenuAplicationMain() throws Exception {
-
-		solo.assertCurrentActivity("Expected activity", "AplicacionMain");
-		solo.clickOnMenuItem("Crear Aviso");
-		solo.assertCurrentActivity("Expected activity", "CrearAvisos");
-		solo.goBack(); // Go back
-		solo.assertCurrentActivity("Expected activity", "AplicacionMain");
-		solo.clickOnMenuItem("Ver Avisos");
-		solo.assertCurrentActivity("Expected activity", "VerAvisos");
-		solo.goBack(); // Go back
-		solo.assertCurrentActivity("Expected activity", "AplicacionMain");
-		solo.clickOnMenuItem("Alta Vehiculo");
-		solo.assertCurrentActivity("Expected activity", "AltaVehiculo");
-		solo.goBack(); // Go back
-		solo.assertCurrentActivity("Expected activity", "AplicacionMain");
-		solo.clickOnMenuItem("Identificar Usuario");
-		solo.assertCurrentActivity("Expected activity", "Identificacion");
-		solo.goBack(); // Go back
-		solo.assertCurrentActivity("Expected activity", "AplicacionMain");
-		solo.clickOnMenuItem("Mapa Avisos");
-		solo.assertCurrentActivity("Expected activity", "HolaMundo1");
-		solo.goBack(); // Go back
-		// Esto debería funcionar
-		// solo.assertCurrentActivity("Expected activity", "AplicacionMain");
+		this.auxiliarMenu(solo, "AplicacionMain", nombreMenus, nombreActivities);
+	}
+	public void testMenuOneActivity() throws Exception {
+		solo.clickOnMenuItem(nombreMenus.get(0));
+		this.auxiliarMenu(solo, nombreActivities.get(0), nombreMenus, nombreActivities);
+	}
+	public void testMenuTwoActivity() throws Exception {
+		solo.clickOnMenuItem(nombreMenus.get(1));
+		this.auxiliarMenu(solo, nombreActivities.get(1), nombreMenus, nombreActivities);
+	}
+	public void testMenuThreeActivity() throws Exception {
+		solo.clickOnMenuItem(nombreMenus.get(2));
+		this.auxiliarMenu(solo, nombreActivities.get(2), nombreMenus, nombreActivities);
+	}
+	public void testMenuFourActivity() throws Exception {
+		solo.clickOnMenuItem(nombreMenus.get(3));
+		this.auxiliarMenu(solo, nombreActivities.get(3), nombreMenus, nombreActivities);
+	}
+	public void testMenuFiveActivity() throws Exception {
+		solo.clickOnMenuItem(nombreMenus.get(4));
+		this.auxiliarMenu(solo, nombreActivities.get(4), nombreMenus, nombreActivities);
+	}
+	public void auxiliarMenu(Solo solo,String activityInicial,ArrayList<String> nombreMenus,ArrayList<String> nombreActivities) throws Exception{
+			for(int i=0;i<nombreMenus.size();i++)
+			{
+				solo.assertCurrentActivity("Expected activity", activityInicial);
+				solo.clickOnMenuItem(nombreMenus.get(i));
+				solo.assertCurrentActivity("Expected activity", nombreActivities.get(i));
+				solo.goBack();
+				solo.assertCurrentActivity("Expected activity", activityInicial);
+			}		
 	}
 
 	public void testGoBack() throws Exception {
@@ -93,7 +108,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 	}
 
 	public void testContent() throws Exception {
-		assertTrue(solo.searchText("Hello World"));
+		assertTrue(solo.searchText("Bienvenido"));
 		solo.assertCurrentActivity("Expected activity", "AplicacionMain");
 		solo.clickOnMenuItem("Crear Aviso");
 		solo.assertCurrentActivity("Expected activity", "CrearAvisos");
@@ -165,14 +180,16 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 	
 	public void testAltaVehiculo(){
 	    
-		solo.clickOnMenuItem("Alta Vehiculo");
+		/*solo.clickOnMenuItem("Alta Vehiculo");
 		solo.assertCurrentActivity("Expected activity", "AltaVehiculo");
 		solo.clearEditText(0);
 		solo.enterText(0, "Vehiculo");
-		solo.clickOnButton(0);
+		solo.clickOnButton(0);*/
 	}
 	public void testIdentificacioAnonimo(){
-		assertTrue(solo.searchText("Anónimo"));
+		assertFalse(solo.searchText("Anónimo"));
+		assertTrue(solo.searchText("Bienvenido"));
 	}
+	
 
 }
