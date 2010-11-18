@@ -1,5 +1,7 @@
 package uspceu.eps.is2.aplicacion.test;
 
+import java.util.Date;
+
 import android.widget.Button;
 import android.widget.EditText;
 import uspceu.eps.is2.aplicacion.Aviso;
@@ -17,20 +19,20 @@ public class TestAvisos extends TestCase {
 		String tipoAviso="Tipo";
 		Usuario usuario = null;
 		PuntoMapa puntoMapa=null;
-		aviso=new Aviso(nombreAviso);
-		aviso=new Aviso(nombreAviso, descripcionAviso);
-		aviso=new Aviso(nombreAviso,tipoAviso,descripcionAviso);
+		Date fechacreacion=new Date();
+		int calificacion=0;
+		int votaciones=0;
 		
-		
-		aviso=new Aviso(nombreAviso,descripcionAviso,usuario,puntoMapa);
+		aviso=new Aviso(nombreAviso, descripcionAviso,usuario,puntoMapa);
 		aviso=new Aviso(nombreAviso,descripcionAviso,tipoAviso,usuario,puntoMapa);
-		//aviso=new Aviso(nombreAviso, tipoAviso, descripcionAviso, usuario, fechacreacion, puntoMapa, calificacion, votaciones);
+		aviso=new Aviso(nombreAviso, tipoAviso, descripcionAviso, usuario, fechacreacion, puntoMapa, calificacion, votaciones);
 		
 		
 	}
 	public void testAvisoSinNombre() throws Exception {
-		
-		try{Aviso aviso=new Aviso("", "Deberia Fallar");
+		Usuario u=null;
+		PuntoMapa pm=null;
+		try{Aviso aviso = new Aviso("", "Deberia Fallar",u,pm);
 		fail("Deberia haber fallado");}
 		catch(Exception e)
 		{
