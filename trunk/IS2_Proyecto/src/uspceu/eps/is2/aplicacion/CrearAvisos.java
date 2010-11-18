@@ -48,10 +48,11 @@ public class CrearAvisos extends AplicacionMain {
 				PuntoMapa pm=new PuntoMapa("40.383333", "-3.716667");
 				
 				/* Crear aviso a partir de lo introducido en el formulario */
-				Aviso a=form.obtenerDatosFormulario(usu, pm);
-				if(!form.nombreVacio())
+				Aviso a;
+				try {
+					a = form.obtenerDatosFormulario(usu, pm);
 					guardarAviso(a);
-				else{
+				} catch (Exception e) {
 					Toast.makeText(CrearAvisos.this,"Introduzca el nombre del aviso",Toast.LENGTH_LONG).show();
 				}
 				

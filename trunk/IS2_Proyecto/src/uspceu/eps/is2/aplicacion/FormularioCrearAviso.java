@@ -61,7 +61,7 @@ public class FormularioCrearAviso {
 		
 	}
 	
-	public Aviso obtenerDatosFormulario(Usuario u, PuntoMapa pm){
+	public Aviso obtenerDatosFormulario(Usuario u, PuntoMapa pm) throws Exception{
 		String nombre=editname.getText().toString();
 		String descripcion=editdesc.getText().toString();
 		if (editdesc.getText().length()==0)

@@ -23,20 +23,51 @@ public class TestAvisos extends TestCase {
 		int calificacion=0;
 		int votaciones=0;
 		
-		aviso=new Aviso(nombreAviso, descripcionAviso,usuario,puntoMapa);
-		aviso=new Aviso(nombreAviso,descripcionAviso,tipoAviso,usuario,puntoMapa);
-		aviso=new Aviso(nombreAviso, tipoAviso, descripcionAviso, usuario, fechacreacion, puntoMapa, calificacion, votaciones);
+		try {
+			aviso=new Aviso(nombreAviso, descripcionAviso,usuario,puntoMapa);
+		} catch (Exception e) {
+			fail("Esto no es normal!!");
+		}
+		try {
+			aviso=new Aviso(nombreAviso,descripcionAviso,tipoAviso,usuario,puntoMapa);
+		} catch (Exception e) {
+			fail("Esto no es normal!!");
+		}
+		try {
+			aviso=new Aviso(nombreAviso, tipoAviso, descripcionAviso, usuario, fechacreacion, puntoMapa, calificacion, votaciones);
+		} catch (Exception e) {
+			fail("Esto no es normal!!");
+		}
 		
 		
 	}
 	public void testAvisoSinNombre() throws Exception {
+		
+		Date fechacreacion=new Date();
 		Usuario u=null;
 		PuntoMapa pm=null;
-		try{Aviso aviso = new Aviso("", "Deberia Fallar",u,pm);
+		try{Aviso aviso = new Aviso("", "Aviso sin nombre",u,pm);
 		fail("Deberia haber fallado");}
 		catch(Exception e)
 		{
-		  
+		  //Se ha lanzado la excepción por intentar meter un aviso sin nombre
+		  e.printStackTrace();
+		}
+		
+		try{Aviso aviso = new Aviso("", "Aviso sin nombre","",u,pm);
+		fail("Deberia haber fallado");}
+		catch(Exception e)
+		{
+		  //Se ha lanzado la excepción por intentar meter un aviso sin nombre
+		  e.printStackTrace();
+		}
+		
+		try{Aviso aviso = new Aviso("", "Aviso sin nombre","",u,fechacreacion,pm,0,0);
+		fail("Deberia haber fallado");}
+		catch(Exception e)
+		{
+		  //Se ha lanzado la excepción por intentar meter un aviso sin nombre
+		  e.printStackTrace();
 		}
 
 	}

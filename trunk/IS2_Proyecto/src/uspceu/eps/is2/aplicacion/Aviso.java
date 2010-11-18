@@ -75,7 +75,8 @@ public class Aviso {
 	//Constructor completo
 	public Aviso(String nombreAviso, String tipoAviso,
 			String descripcionAviso, Usuario usuario, Date fechacreacion,
-			PuntoMapa puntoMapa, int calificacion, int votaciones) {
+			PuntoMapa puntoMapa, int calificacion, int votaciones) throws Exception {
+		if(nombreAviso.length()<1) throw new Exception("Aviso sin nombre");
 		this.nombreAviso = nombreAviso;
 		this.tipoAviso = tipoAviso;
 		this.descripcionAviso = descripcionAviso;
@@ -87,8 +88,8 @@ public class Aviso {
 	}
 	
 	//Constructor que pone los valores de fecha, calificación y votaciones por defecto
-	public Aviso(String nombreAviso, String descripcionAviso, String tipo, Usuario usuario, PuntoMapa puntoMapa) {
-		
+	public Aviso(String nombreAviso, String descripcionAviso, String tipo, Usuario usuario, PuntoMapa puntoMapa) throws Exception{
+		if(nombreAviso.length()<1) throw new Exception("Aviso sin nombre");
 		this.nombreAviso = nombreAviso;
 		this.tipoAviso = tipo;
 		this.descripcionAviso = descripcionAviso;
@@ -100,8 +101,8 @@ public class Aviso {
 	}	
 	
 	// Constructor que pone los valores de tipo, fecha, calificación y votaciones por defecto
-	public Aviso(String nombreAviso, String descripcionAviso, Usuario usuario, PuntoMapa puntoMapa) {
-		
+	public Aviso(String nombreAviso, String descripcionAviso, Usuario usuario, PuntoMapa puntoMapa) throws Exception {
+		if(nombreAviso.length()<1) throw new Exception("Aviso sin nombre");
 		this.nombreAviso = nombreAviso;
 		this.tipoAviso = "Evento";
 		this.descripcionAviso = descripcionAviso;
