@@ -1,5 +1,4 @@
 package uspceu.eps.is2.aplicacion.test;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -54,7 +53,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<AplicacionMain> {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		// this.activity.finish();
+		 this.activity.finish();
 		super.tearDown();
 	}
 
