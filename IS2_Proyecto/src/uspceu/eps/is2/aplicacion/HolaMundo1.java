@@ -13,6 +13,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 
 
+
 public class HolaMundo1 extends MapActivity 
 {    
 	  public static final String TAG = "HolaMundo1";
@@ -43,6 +44,7 @@ public class HolaMundo1 extends MapActivity
 	        myLocationOverlay.enableCompass();
 	        mapController = mapView.getController();
 	        mapView.setBuiltInZoomControls(true);
+	       
 	        //truquito lo haces correr cuando fija su posici—n de otra forma nunca funciona
 	        myLocationOverlay.runOnFirstFix(new Runnable() {
 	            public void run() {
@@ -89,7 +91,7 @@ public class HolaMundo1 extends MapActivity
 	        	return true;
 	        	
 	        case R.id.Identificacion:
-	        	this.startActivity(new Intent().setClass(this, Identificacion.class));
+	        	mapController.animateTo(myLocationOverlay.getMyLocation());
 	        	return true;
 	        	
 	      /*case R.id.ID_ACTIVIDAD:

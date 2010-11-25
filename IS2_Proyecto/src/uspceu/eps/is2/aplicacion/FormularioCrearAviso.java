@@ -61,8 +61,10 @@ public class FormularioCrearAviso {
 		
 	}
 	
-	public Aviso obtenerDatosFormulario(Usuario u, PuntoMapa pm) throws Exception{
+	public Aviso obtenerDatosFormulario(Usuario u, PuntoMapa pm){
 		String nombre=editname.getText().toString();
+		if (editname.getText().length()==0)
+			nombre="SinNombre";
 		String descripcion=editdesc.getText().toString();
 		if (editdesc.getText().length()==0)
 			descripcion="(sin descripción)";
@@ -72,14 +74,6 @@ public class FormularioCrearAviso {
 	public void vaciarCampos(){
 		editname.setText("");
 		editdesc.setText("");
-	}
-	
-	public boolean nombreVacio(){
-		return(this.editname.getText().length()==0);
-	}
-	
-	public boolean descripcionVacio(){
-		return(this.editdesc.getText().length()==0);
 	}
 	
 }

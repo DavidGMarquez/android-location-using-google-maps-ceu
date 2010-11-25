@@ -4,9 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,7 +35,6 @@ public class CrearAvisos extends AplicacionMain {
 	
 	public void hacerFormularioCrearAviso()
     {        
-		
         this.form.setEditname((EditText) findViewById(R.id.editname));
         this.form.setEditdesc((EditText) findViewById(R.id.editdesc));
         this.form.setButton((Button) findViewById(R.id.save));
@@ -48,11 +50,10 @@ public class CrearAvisos extends AplicacionMain {
 				PuntoMapa pm=new PuntoMapa("40.383333", "-3.716667");
 				
 				/* Crear aviso a partir de lo introducido en el formulario */
-				Aviso a;
-				try {
-					a = form.obtenerDatosFormulario(usu, pm);
+				Aviso a=form.obtenerDatosFormulario(usu, pm);
+				if(form.getEditname().getText().length()!=0)
 					guardarAviso(a);
-				} catch (Exception e) {
+				else{
 					Toast.makeText(CrearAvisos.this,"Introduzca el nombre del aviso",Toast.LENGTH_LONG).show();
 				}
 				
