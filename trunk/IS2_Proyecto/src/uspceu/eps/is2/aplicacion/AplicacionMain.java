@@ -28,9 +28,10 @@ public class AplicacionMain extends Activity {
         
         if (registrado==true)
         	tv.append("\nBienvenido, "+this.getEmailUsuario());
-        else
-        	tv.setText(R.string.sinregistrar);
-        
+        else {
+        	Toast.makeText(AplicacionMain.this,R.string.sinregistrar,Toast.LENGTH_LONG).show();
+        	this.finish();
+        }
         
         if(fileList().length==0){
         	this.crearArchivo("avisos_guardados");
