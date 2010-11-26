@@ -3,7 +3,7 @@
  */
 package uspceu.eps.is2.aplicacion;
 
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -71,10 +71,12 @@ public class Aviso {
 	public int getVotaciones() {
 		return votaciones;
 	}
+	
+	//Constructor completo
 	public Aviso(String nombreAviso, String tipoAviso,
 			String descripcionAviso, Usuario usuario, Date fechacreacion,
-			PuntoMapa puntoMapa, int calificacion, int votaciones) {
-		super();
+			PuntoMapa puntoMapa, int calificacion, int votaciones) throws Exception {
+		if(nombreAviso.length()<1) throw new Exception("Aviso sin nombre");
 		this.nombreAviso = nombreAviso;
 		this.tipoAviso = tipoAviso;
 		this.descripcionAviso = descripcionAviso;
@@ -85,8 +87,9 @@ public class Aviso {
 		this.votaciones=votaciones;
 	}
 	
-	public Aviso(String nombreAviso, String descripcionAviso, String tipo, Usuario usuario, PuntoMapa puntoMapa) {
-		super();
+	//Constructor que pone los valores de fecha, calificación y votaciones por defecto
+	public Aviso(String nombreAviso, String descripcionAviso, String tipo, Usuario usuario, PuntoMapa puntoMapa) throws Exception{
+		if(nombreAviso.length()<1) throw new Exception("Aviso sin nombre");
 		this.nombreAviso = nombreAviso;
 		this.tipoAviso = tipo;
 		this.descripcionAviso = descripcionAviso;
@@ -97,8 +100,9 @@ public class Aviso {
 		this.votaciones=0;
 	}	
 	
-	public Aviso(String nombreAviso, String descripcionAviso, Usuario usuario, PuntoMapa puntoMapa) {
-		super();
+	// Constructor que pone los valores de tipo, fecha, calificación y votaciones por defecto
+	public Aviso(String nombreAviso, String descripcionAviso, Usuario usuario, PuntoMapa puntoMapa) throws Exception {
+		if(nombreAviso.length()<1) throw new Exception("Aviso sin nombre");
 		this.nombreAviso = nombreAviso;
 		this.tipoAviso = "Evento";
 		this.descripcionAviso = descripcionAviso;
@@ -108,24 +112,7 @@ public class Aviso {
 		this.calificacion=0;
 		this.votaciones=0;
 	}
-	
-	
-	
-	
-	public Aviso(String nombreAviso, String tipoAviso, String descripcionAviso) {
-		super();
-		this.nombreAviso = nombreAviso;
-		this.tipoAviso = tipoAviso;
-		this.descripcionAviso = descripcionAviso;
-	}
-	
-	public Aviso(String nombreAviso, String descripcionAviso) {
-		super();
-		this.nombreAviso = nombreAviso;
-		this.descripcionAviso = descripcionAviso;
-	}
-	
-	
+		
 	public String toCompleto() {		
 		return "Aviso: "+ nombreAviso + "\n" +
 				"Tipo: " + tipoAviso + "\n" +
