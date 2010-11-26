@@ -42,7 +42,7 @@ public class CrearAvisos extends AplicacionMain {
 			public void onClick(View v) {
 				
 				/* Cambiar por el Usuario registrado o UsuarioAnonimo... */
-				Usuario usu=new Usuario("Anonimo");
+				Usuario usu=new Usuario(getEmailUsuario());
 
 				/* Cambiar por las coordenadas que correspondan...*/
 				PuntoMapa pm=new PuntoMapa("40.383333", "-3.716667");

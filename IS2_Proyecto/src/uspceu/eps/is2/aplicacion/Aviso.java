@@ -4,6 +4,7 @@
 package uspceu.eps.is2.aplicacion;
 
 //import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -124,9 +125,13 @@ public class Aviso {
 	}
 
 	public String toMostrar() {		
+		
+		
 		return "Aviso: "+ nombreAviso + "\n" +
-				descripcionAviso + "\n";
-				//"Creado el: " + fechacreacion + "\n";
+				descripcionAviso + "\n" +
+				"Creado el: " + 
+				 new SimpleDateFormat("HH:mm dd/MM/yy").format(this.getFechacreacion())+'\n' +
+				"Usuario: "+ usuario.getNombre();
 	}
 	
 	@Override
@@ -166,7 +171,7 @@ public class Aviso {
 		fin=aviso.indexOf("\n",ini);
 		this.fechacreacion=new Date(aviso.substring(ini,fin));
 		
-		ini=aviso.indexOf(" ",fin)+1;
+		ini=aviso.indexOf(": ",fin)+1;
 		fin=aviso.indexOf("\n",ini);
 		this.usuario=new Usuario(aviso.substring(ini, fin));
 		
