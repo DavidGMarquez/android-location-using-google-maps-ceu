@@ -1,16 +1,24 @@
 package uspceu.eps.is2.aplicacion;
 
+import java.util.Iterator;
+import java.util.List;
+
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
 
 
@@ -21,27 +29,38 @@ public class HolaMundo1 extends MapActivity
 	    private MapView mapView;
 	    private MyLocationOverlay myLocationOverlay;
 	    private MapController mapController;
-	
-	 
+	    	 
 	    /** Called when the activity is first created. */
 	    
 		@Override
 	    public void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-	     
+	        super.onCreate(savedInstanceState);	     
 	        getWindow().setFormat(PixelFormat.TRANSPARENT);
-	     
 	        // Inflate our UI from its XML layout description.
 	        setContentView(R.layout.mapa);
 	        mapView = (MapView)findViewById(R.id.mapa);
+
+	       /* List<Overlay> mapOverlays = mapView.getOverlays();
+		    Drawable drawable = this.getResources().getDrawable(R.drawable.androidmarker);
+		    HelloItemizedOverlay itemizedoverlay = new HelloItemizedOverlay(drawable);*/
+
+	        List<Overlay> mapOverlays = mapView.getOverlays();
+	        Drawable drawable =	this.getResources().getDrawable(R.drawable.androidmarker);
+	        HelloItemizedOverlay itemizedoverlay = new	HelloItemizedOverlay(drawable,this);
+	        GeoPoint point = new GeoPoint(19240000,-99120000);
+	        OverlayItem overlayitem = new OverlayItem(point, "Hola,	Mundo!", "I'm in Mexico City!");
+	        itemizedoverlay.addOverlay(overlayitem);
+	        mapOverlays.add(itemizedoverlay);
+	        
 	        
 	       //a–ade mi localizaci—n al mapa
 	        myLocationOverlay = new MyLocationOverlay(this, mapView);
 	        myLocationOverlay.enableMyLocation();
 	        mapView.getOverlays().add(myLocationOverlay);
 	     
-	        //personaliza el mapa
+	        //Poner brujula
 	        myLocationOverlay.enableCompass();
+	        //Poner botones de zoom
 	        mapController = mapView.getController();
 	        mapView.setBuiltInZoomControls(true);
 	       
@@ -51,6 +70,7 @@ public class HolaMundo1 extends MapActivity
 	                mapController.animateTo(myLocationOverlay.getMyLocation());
 	            }
 	        });
+	        //Fijar el zoom
 	        mapController.setZoom(10);
 
    
