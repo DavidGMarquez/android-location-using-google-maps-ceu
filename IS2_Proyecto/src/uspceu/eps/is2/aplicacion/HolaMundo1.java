@@ -44,13 +44,7 @@ public class HolaMundo1 extends MapActivity
 		    Drawable drawable = this.getResources().getDrawable(R.drawable.androidmarker);
 		    HelloItemizedOverlay itemizedoverlay = new HelloItemizedOverlay(drawable);*/
 
-	        List<Overlay> mapOverlays = mapView.getOverlays();
-	        Drawable drawable =	this.getResources().getDrawable(R.drawable.androidmarker);
-	        HelloItemizedOverlay itemizedoverlay = new	HelloItemizedOverlay(drawable,this);
-	        GeoPoint point = new GeoPoint(19240000,-99120000);
-	        OverlayItem overlayitem = new OverlayItem(point, "Hola,	Mundo!", "I'm in Mexico City!");
-	        itemizedoverlay.addOverlay(overlayitem);
-	        mapOverlays.add(itemizedoverlay);
+	        
 	        
 	        
 	       //a–ade mi localizaci—n al mapa
@@ -63,6 +57,15 @@ public class HolaMundo1 extends MapActivity
 	        //Poner botones de zoom
 	        mapController = mapView.getController();
 	        mapView.setBuiltInZoomControls(true);
+	        
+	        List<Overlay> mapOverlays = mapView.getOverlays();
+	        Drawable drawable =	this.getResources().getDrawable(R.drawable.radar);
+	        HelloItemizedOverlay itemizedoverlay = new	HelloItemizedOverlay(drawable,this);
+	        GeoPoint point = new GeoPoint(4039375,-4045945);
+	        OverlayItem overlayitem = new OverlayItem(point, "Radar fijo", "Vel. máxima 100 km/h");
+	        itemizedoverlay.addOverlay(overlayitem);
+	        mapOverlays.add(itemizedoverlay);
+	        
 	       
 	        //truquito lo haces correr cuando fija su posici—n de otra forma nunca funciona
 	        myLocationOverlay.runOnFirstFix(new Runnable() {
