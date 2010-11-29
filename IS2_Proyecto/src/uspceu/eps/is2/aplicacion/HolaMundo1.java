@@ -58,15 +58,25 @@ public class HolaMundo1 extends MapActivity
 	        mapController = mapView.getController();
 	        mapView.setBuiltInZoomControls(true);
 	        
+	      //ejemplo Radar fijo
 	        List<Overlay> mapOverlays = mapView.getOverlays();
 	        Drawable drawable =	this.getResources().getDrawable(R.drawable.radar);
 	        HelloItemizedOverlay itemizedoverlay = new	HelloItemizedOverlay(drawable,this);
-	        GeoPoint point = new GeoPoint(4039375,-4045945);
+	        GeoPoint point = new GeoPoint(40397255,-3842747);
 	        OverlayItem overlayitem = new OverlayItem(point, "Radar fijo", "Vel. máxima 100 km/h");
 	        itemizedoverlay.addOverlay(overlayitem);
 	        mapOverlays.add(itemizedoverlay);
 	        
 	       
+	        //ejemplo alcoholemia
+	        
+	        drawable =	this.getResources().getDrawable(R.drawable.alcohol);
+	        itemizedoverlay = new	HelloItemizedOverlay(drawable,this);
+	        GeoPoint point2 = new GeoPoint(40399395,-3835666);
+	        OverlayItem overlayitem2 = new OverlayItem(point2, "Control Alcoholemia", "Sin salida");
+	        itemizedoverlay.addOverlay(overlayitem2);
+	        mapOverlays.add(itemizedoverlay);
+	        
 	        //truquito lo haces correr cuando fija su posici—n de otra forma nunca funciona
 	        myLocationOverlay.runOnFirstFix(new Runnable() {
 	            public void run() {
