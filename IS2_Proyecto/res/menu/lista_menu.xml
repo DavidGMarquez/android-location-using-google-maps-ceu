@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@id/crear_avisos"
+          android:icon="@drawable/ic_crear"
+          android:title="Crear Aviso" />
+          
+    <item android:id="@id/ver_avisos"
+          android:icon="@drawable/ic_ver"
+          android:title="Ver Avisos" />
+          
+    <item android:id="@id/alta_vehiculo"
+          android:icon="@drawable/car2"
+          android:title="Alta Vehiculo" />
+          
+    <item android:id="@id/mapa"
+          android:icon="@drawable/ic_mapa"
+          android:title="Mapa Avisos" />
+          
+    <item android:id="@+id/filtrofecha"
+          android:icon="@drawable/ic_fecha"
+          android:title="Filtrar por fechas" />
+          
+<!--    <item android:id="@+id/filtrousuario"-->
+<!--          android:icon="@drawable/ic_fecha"-->
+<!--          android:title="Filtrar por usuario" />-->
+          
+
+</menu>

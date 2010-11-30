@@ -15,7 +15,7 @@
           android:title="Alta Vehiculo" />
           
     <item android:id="@+id/mapa"
-          android:icon="@drawable/car2"
+          android:icon="@drawable/ic_mapa"
           android:title="Mapa Avisos" />
           
     <item android:id="@+id/Identificacion"

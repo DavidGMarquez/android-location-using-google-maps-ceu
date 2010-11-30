@@ -7,4 +7,8 @@
     <string name="nousuarios">Sin espacios y \nentre 6 y 20 caracteres...\n...por favor</string>
     <string name=".IndentificarUsuario">Identificar Usuario</string>
     <string name="btn_showMessage">Identificarse</string>
+    <string name="filtro_fechaini">Fecha Inicio</string>
+    <string name="filtro_horaini">Hora Inicio</string>
+    <string name="filtro_fechafin">Fecha Fin</string>
+    <string name="filtro_horafin">Hora Fin</string>
 </resources>
