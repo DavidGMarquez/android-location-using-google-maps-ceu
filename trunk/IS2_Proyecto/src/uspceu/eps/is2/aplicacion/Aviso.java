@@ -138,7 +138,7 @@ public class Aviso {
 	public String toString(){
 		//SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yy");
 		//return this.getNombreAviso()+", "+sdf.format(this.getFechacreacion())+'\n';
-		return this.getNombreAviso()+'\n';
+		return this.getNombreAviso()+"  "+new SimpleDateFormat("HH:mm dd/MM/yy").format(this.getFechacreacion())+'\n';
 	}
 	
 	/* Metodos para leer avisos de fichero */
