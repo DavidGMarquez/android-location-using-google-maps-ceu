@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -22,6 +23,7 @@ import com.google.android.maps.OverlayItem;
 
 
 
+
 public class HolaMundo1 extends MapActivity 
 {    
 	  public static final String TAG = "HolaMundo1";
@@ -29,7 +31,8 @@ public class HolaMundo1 extends MapActivity
 	    private MapView mapView;
 	    private MyLocationOverlay myLocationOverlay;
 	    private MapController mapController;
-	    	 
+
+	    
 	    /** Called when the activity is first created. */
 	    
 		@Override
@@ -57,6 +60,15 @@ public class HolaMundo1 extends MapActivity
 	        //Poner botones de zoom
 	        mapController = mapView.getController();
 	        mapView.setBuiltInZoomControls(true);
+	        
+	        
+	        // CENTRAR PANTALLA, faltaría poner un layout con el botón
+	       // GeoPoint puntoc = myLocationOverlay.getMyLocation();
+	       // mapController.setCenter(puntoc);
+	        
+	        
+	        
+	        mapView.setTraffic(true);
 	        
 	      //ejemplo Radar fijo
 	        List<Overlay> mapOverlays = mapView.getOverlays();
@@ -102,6 +114,8 @@ public class HolaMundo1 extends MapActivity
 	        return true;
 	    }
 	    
+	   
+		
 	    @Override
 	    public boolean onOptionsItemSelected(MenuItem item) {
 	        // Handle item selection
