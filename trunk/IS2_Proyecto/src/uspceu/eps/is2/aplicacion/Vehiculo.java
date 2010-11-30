@@ -3,6 +3,7 @@ package uspceu.eps.is2.aplicacion;
 //import java.util.Date;
 
 public class Vehiculo {
+	private String descripcion;
 	private String matricula;
 	private String marca;
 	private String modelo;
@@ -11,43 +12,38 @@ public class Vehiculo {
 	
 	
 	public Vehiculo(String matricula, String marca,
-	String modelo,String color){ //Usuario usuario) {
+	String modelo,String color,String descripcion){ //Usuario usuario) {
 		super();
 		this.matricula = matricula;
 		this.marca = marca;
 		this.modelo=modelo;
 		this.color = color;
-		//this.usuario = usuario;
+		this.descripcion=descripcion;
+		
 		
 	}
 
-	public Vehiculo(String datos,int n){
-		this.matricula = datos;
-		this.marca =" ";
-		this.modelo=" ";
-		this.color =" ";
+	public Vehiculo(String descripcion,String matricula){
+		this.matricula = matricula;
+		this.descripcion=descripcion;
+		this.marca ="";
+		this.modelo="";
+		this.color ="";
 	
 	}
 	
-	public Vehiculo(String aviso){
+	public Vehiculo(String datosVehiculo){
 		int ini=0, fin=0;
 	//	String au="";
 		
-		ini=aviso.indexOf(" ",0)+1;
-		fin=aviso.indexOf("\n",ini);
-		this.matricula=aviso.substring(ini,fin);
+		ini=datosVehiculo.indexOf("$$$",0)+3;
+		fin=datosVehiculo.indexOf("$$$",ini);
+		this.descripcion=datosVehiculo.substring(ini,fin);
 		
-		ini=aviso.indexOf(" ",fin)+1;
-		fin=aviso.indexOf("\n",ini);
-		this.marca=aviso.substring(ini,fin);
+		ini=datosVehiculo.indexOf("$$$",fin)+3;
+		fin=datosVehiculo.indexOf("$$$",ini);
+		this.matricula=datosVehiculo.substring(ini,fin);
 		
-		ini=fin+1;
-		fin=aviso.indexOf("\n",ini);
-		this.modelo=aviso.substring(ini,fin);
-			
-		ini=aviso.indexOf(" ",fin)+1;
-		fin=aviso.indexOf("\n",ini);
-		this.color=aviso.substring(ini,fin);
 		
 	}
 	
@@ -79,18 +75,28 @@ public class Vehiculo {
 	public void setColor(String col) {
 		this.color = col;
 	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-	public String toCompleto2() {		
-		return "Descripcion: " + matricula + "\n";
-				 				
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String toStringDescMatri() {		
+		return new String("$$$"+this.getDescripcion()+"$$$"+this.getMatricula()+"$$$");				 			
+	}
+	public String toString(){
+		return new String("Vehiculo:"+this.getDescripcion()+"\nMatricula:"+this.getMatricula());
 	}
 	
-	public String toCompleto() {		
+/*	public String toCompleto() {		
 		return "Matricula: " + matricula + "\n" +
 				"Marca: " + marca + "\n" +
 				"Modelo:"+ modelo+"\n" +
 				"Color: " + color+ "\n";  
 				
-	}
+	}*/
 	
 }

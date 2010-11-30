@@ -7,20 +7,25 @@
 
 
 	<TextView android:id="@+id/label" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:background="@android:drawable/editbox_background"
-		android:textStyle="bold" android:typeface="serif"
-
-		android:text="Introducir datos Vehiculo:                      ejem(4888 mercedes E300..)" />
+		android:layout_height="wrap_content" 
+		android:typeface="serif" android:text="Descripción vehículo" android:textColor="#ffff0000" android:textStyle="bold|italic"/>
 
 
 	<EditText android:id="@+id/id_vehiculo" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:background="@android:drawable/editbox_background"
 		android:singleLine="true" android:layout_below="@id/label" />
 
+	<TextView android:id="@+id/label2" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:text="Matrícula" android:layout_below="@id/id_vehiculo" android:textColor="#ffffff00" android:textStyle="bold|italic" android:typeface="serif"/>
+		
+	<EditText android:id="@+id/id_matricula" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:background="@android:drawable/editbox_background"
+		android:singleLine="true" android:layout_below="@id/label2" />
 
 
 	<Button android:id="@+id/btn_showMessage" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:layout_below="@id/id_vehiculo"
+		android:layout_height="wrap_content" android:layout_below="@id/id_matricula"
 		android:layout_alignParentRight="true" android:layout_marginLeft="10px"
 		android:text="Guardar" />
 
