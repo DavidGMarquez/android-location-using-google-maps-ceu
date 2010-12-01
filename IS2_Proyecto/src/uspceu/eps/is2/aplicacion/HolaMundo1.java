@@ -110,7 +110,7 @@ public class HolaMundo1 extends MapActivity
 	    @Override
 	    public boolean onCreateOptionsMenu(Menu menu) {
 	        MenuInflater inflater = getMenuInflater();
-	        inflater.inflate(R.menu.app_menu, menu);
+	        inflater.inflate(R.menu.mapa_menu, menu);
 	        return true;
 	    }
 	    
@@ -137,7 +137,7 @@ public class HolaMundo1 extends MapActivity
 	        	this.startActivity(new Intent().setClass(this, HolaMundo1.class));
 	        	return true;
 	        	
-	        case R.id.Identificacion:
+	        case R.id.localizar:
 	        	mapController.animateTo(myLocationOverlay.getMyLocation());
 	        	return true;
 	        	

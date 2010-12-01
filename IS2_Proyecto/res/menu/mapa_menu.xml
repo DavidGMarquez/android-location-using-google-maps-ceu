@@ -18,6 +18,9 @@
           android:icon="@drawable/ic_mapa"
           android:title="Mapa Avisos" />
           
+    <item android:id="@+id/localizar"
+          android:icon="@drawable/ic_usuario"
+          android:title="Mi ubicacion" />
           
 <!--    <item android:id="@+id/identificarse"-->
 <!--          android:icon="@drawable/car2"-->
