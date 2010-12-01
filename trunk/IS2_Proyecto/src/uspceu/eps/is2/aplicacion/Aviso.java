@@ -129,6 +129,7 @@ public class Aviso {
 		
 		return "Aviso: "+ nombreAviso + "\n" +
 				descripcionAviso + "\n" +
+				"En: "+this.puntoMapa.toString() + '\n'+
 				"Creado el: " + 
 				 new SimpleDateFormat("HH:mm dd/MM/yy").format(this.getFechacreacion())+'\n' +
 				"Usuario: "+ usuario.getNombre();
