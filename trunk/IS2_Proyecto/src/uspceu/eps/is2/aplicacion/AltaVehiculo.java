@@ -54,7 +54,9 @@ import android.widget.Toast;
       File file = getBaseContext().getFileStreamPath("Vehiculo");
       if(file.exists())
       {
-    	  Toast.makeText(getBaseContext(),"Ya existe un vehículo si le da a guardar se actualizaran los datos", Toast.LENGTH_LONG).show();
+  	    String stringVehiculo=leerVehiculo();
+ 		Vehiculo vehiculo=new Vehiculo(stringVehiculo);
+    	  Toast.makeText(getBaseContext(),"Ya existe un vehículo si le da a guardar se actualizaran los datos \n"+vehiculo.toString(), Toast.LENGTH_LONG).show();
       }
 
 
@@ -77,7 +79,9 @@ import android.widget.Toast;
                 		//-- ,id_modelo.getText().toString(),id_color.getText().toString());
                 // Toast.makeText(getBaseContext(),vehi.getMarca(), Toast.LENGTH_LONG).show();  		 
                  guardarVehiculo(vehi);    
-                 leerVehiculo();
+                 String stringVehiculo=leerVehiculo();
+         		Vehiculo vehiculo=new Vehiculo(stringVehiculo);
+   			 Toast.makeText(getBaseContext(),"Actualizado!!!\n"+vehiculo.toString(), Toast.LENGTH_LONG).show();
              }
              }
          });      
@@ -127,9 +131,7 @@ import android.widget.Toast;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		Vehiculo vehiculo=new Vehiculo(stringVehiculo);
-			 Toast.makeText(getBaseContext(),"Actualizado!!!\n"+vehiculo.toString(), Toast.LENGTH_LONG).show();              	
+		}              	
 		return stringVehiculo;
 	}
  
