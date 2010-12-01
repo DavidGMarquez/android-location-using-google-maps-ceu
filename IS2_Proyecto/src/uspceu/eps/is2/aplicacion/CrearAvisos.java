@@ -35,8 +35,14 @@ public class CrearAvisos extends AplicacionMain {
 		
         this.form.setEditname((EditText) findViewById(R.id.editname));
         this.form.setEditdesc((EditText) findViewById(R.id.editdesc));
+        this.form.setEditlat((EditText) findViewById(R.id.editlat));
+        this.form.setEditlon((EditText) findViewById(R.id.editlon));
         this.form.setButton((Button) findViewById(R.id.save));
         
+        /* Cambiar por las coordenadas que correspondan...*/
+		PuntoMapa pm=new PuntoMapa("40.383333", "-3.716667");
+		//form.defaultCoordenadas(pm);
+		
 		this.form.getButton().setOnClickListener (new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -44,13 +50,12 @@ public class CrearAvisos extends AplicacionMain {
 				/* Cambiar por el Usuario registrado o UsuarioAnonimo... */
 				Usuario usu=new Usuario(getEmailUsuario());
 
-				/* Cambiar por las coordenadas que correspondan...*/
-				PuntoMapa pm=new PuntoMapa("40.383333", "-3.716667");
+				
 				
 				/* Crear aviso a partir de lo introducido en el formulario */
 				Aviso a;
 				try {
-					a = form.obtenerDatosFormulario(usu, pm);
+					a = form.obtenerDatosFormulario(usu);
 					guardarAviso(a);
 				} catch (Exception e) {
 					Toast.makeText(CrearAvisos.this,"Introduzca el nombre del aviso",Toast.LENGTH_LONG).show();
