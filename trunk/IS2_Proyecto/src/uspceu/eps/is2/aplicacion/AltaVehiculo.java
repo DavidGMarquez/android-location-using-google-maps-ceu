@@ -31,7 +31,7 @@ import android.widget.Toast;
    //--  private EditText id_marca;
    //--  private EditText id_modelo;
    //--  private EditText id_color;
-     
+     Vehiculo c=new Vehiculo();
      private TextView lab;
      private Button btnShowMessage;
      //private ImageView img; 
@@ -43,6 +43,7 @@ import android.widget.Toast;
      
          id_vehiculo = (EditText) findViewById(R.id.id_vehiculo);
          id_matricula = (EditText) findViewById(R.id.id_matricula);
+       
          lab= (TextView) findViewById(R.id.label);
             //  lab.setText("Italic, highlighted, bold.", TextView.BufferType.SPANNABLE); 
          //---  id_marca = (EditText) findViewById(R.id.id_marca);
@@ -62,19 +63,20 @@ import android.widget.Toast;
 
          btnShowMessage.setOnClickListener(new View.OnClickListener() {
              public void onClick(View v) {
-            	   Pattern p = Pattern.compile("(\\d{4}-[\\D\\w]{3}|[\\D\\w]{1,2}-\\d{4}-[\\D\\w]{2})");
-            	      Matcher m = p.matcher(id_matricula.getText());
-            	      if (!m.find()){
-            	    	  Toast.makeText(getBaseContext(),"Matricula incorrecta, introduzca formato válido", Toast.LENGTH_LONG).show();            	      
-            	    }
-             else{
+         //   	   Pattern p = Pattern.compile("(\\d{4}-[\\D\\w]{3}|[\\D\\w]{1,2}-\\d{4}-[\\D\\w]{2})");
+         //   	      Matcher m = p.matcher(id_matricula.getText());
+         //   	      if (!m.find()){
+          //  	    	  Toast.makeText(getBaseContext(),"Matricula incorrecta, introduzca formato válido", Toast.LENGTH_LONG).show();            	      
+          //  	    }
+           //  else{
              /*    String str =  id_vehiculo.getText().toString()+" "+id_modelo.getText().toString()
                  +" "+ id_marca.getText().toString()+ ""+id_color.getText().toString()
                  +
                      "!";*/
                  //Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
             	 Vehiculo vehi=new Vehiculo(id_vehiculo.getText().toString(), id_matricula.getText().toString());
-                 
+                 if (vehi.isValida()==true)
+                 {
                 		//-- ,id_marca.getText().toString()
                 		//-- ,id_modelo.getText().toString(),id_color.getText().toString());
                 // Toast.makeText(getBaseContext(),vehi.getMarca(), Toast.LENGTH_LONG).show();  		 
@@ -83,7 +85,10 @@ import android.widget.Toast;
          		Vehiculo vehiculo=new Vehiculo(stringVehiculo);
    			 Toast.makeText(getBaseContext(),"Actualizado!!!\n"+vehiculo.toString(), Toast.LENGTH_LONG).show();
              }
+                 else
+                	 Toast.makeText(getBaseContext(),"Formato de la matricula Incorrecto,Intentolo de nuevo!!!\n", Toast.LENGTH_LONG).show();
              }
+             //}
          });      
      
      }
