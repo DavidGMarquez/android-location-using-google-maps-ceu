@@ -280,8 +280,13 @@ public class VerAvisos extends ListActivity {
 			aux += stringarray.get(i);
 			if ((i + 1) % 8 == 0) {
 				ai++;
-				Aviso a = new Aviso(aux);
-				al.add(a);
+				Aviso a;
+				try {
+					a = new Aviso(aux);
+					al.add(a);
+				} catch (FormatoCoordenadasException e) {
+					Toast.makeText(VerAvisos.this,"Ha habido un error al leer del archivo.\nLa lista puede estar incompleta",Toast.LENGTH_LONG).show();
+				}
 				aux = "";
 			}
 		}

@@ -20,21 +20,21 @@ public class PuntoMapa {
 		this.longitud = longitud;
 	}
 
-	public PuntoMapa(String latitud, String longitud) {
+	public PuntoMapa(String latitud, String longitud) throws FormatoCoordenadasException {
 		super();
 		double la=0,lo=0;
 		try {
 			la=new Double(latitud).doubleValue();
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			la=0;
+			throw new FormatoCoordenadasException("Latitud incorrecta");
 		}
 		try {
 			lo=new Double(longitud).doubleValue();
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			lo=0;
+			throw new FormatoCoordenadasException("Longitud incorrecta");
 		}
+		if(la>90||la<-90) throw new FormatoCoordenadasException("Latitud inexistente");
+		if(lo>180||lo<-180) throw new FormatoCoordenadasException("Longitud inexistente");
 		this.latitud = new Double(la).toString();
 		this.longitud = new Double(lo).toString();
 	}
