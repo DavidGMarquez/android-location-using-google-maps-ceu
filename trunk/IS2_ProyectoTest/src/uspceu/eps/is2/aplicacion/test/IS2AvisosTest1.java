@@ -52,19 +52,6 @@ public class IS2AvisosTest1 extends
 		assertEquals(resourceString, (String) mActivity.getTitle());
 	}
 
-	public void testAvisoSinNombre() throws Exception {
-		FormularioCrearAviso form;
 
-		// ListView lv=(ListView) mActivity.findViewById(R.id.ver_avisos)
-		form = new FormularioCrearAviso();
-
-		EditText name = (EditText) mActivity.findViewById(R.id.editname);
-		name.setText("AvisoPrueba");
-		EditText desc = (EditText) mActivity.findViewById(R.id.editdesc);
-		desc.setText("Prueba Descripcion");
-		Button botonAviso = (Button) mActivity.findViewById(R.id.save);
-		botonAviso.performClick();
-
-	}
 
 }
