@@ -40,11 +40,10 @@ public class CrearAvisos extends AplicacionMain {
         this.form.setButton((Button) findViewById(R.id.save));
         
         /* Cambiar por las coordenadas que correspondan...*/
-		PuntoMapa pm=new PuntoMapa("40.383333", "-3.716667");
+		//PuntoMapa pm=new PuntoMapa("40.383333", "-3.716667");
 		//form.defaultCoordenadas(pm);
 		
 		this.form.getButton().setOnClickListener (new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				
 				/* Cambiar por el Usuario registrado o UsuarioAnonimo... */
@@ -57,12 +56,16 @@ public class CrearAvisos extends AplicacionMain {
 				try {
 					a = form.obtenerDatosFormulario(usu);
 					guardarAviso(a);
-				} catch (Exception e) {
+					
+					/* Pone los campos en blanco (quitar??) */
+					form.vaciarCampos();
+				} catch (NombreAvisoException e) {
 					Toast.makeText(CrearAvisos.this,"Introduzca el nombre del aviso",Toast.LENGTH_LONG).show();
+				} catch (FormatoCoordenadasException e) {
+					Toast.makeText(CrearAvisos.this,"Formato de las coordenadas incorrecto\nCompruebe que están en formato decimal (p ej: 40.38333)",Toast.LENGTH_LONG).show();
 				}
 				
-				/* Pone los campos en blanco (quitar??) */
-				form.vaciarCampos();
+				
 				
 			}
 		});
