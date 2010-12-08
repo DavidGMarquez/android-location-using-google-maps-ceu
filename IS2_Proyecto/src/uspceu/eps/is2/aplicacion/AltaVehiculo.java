@@ -31,7 +31,7 @@ import android.widget.Toast;
    //--  private EditText id_marca;
    //--  private EditText id_modelo;
    //--  private EditText id_color;
-     Vehiculo c=new Vehiculo();
+     
      private TextView lab;
      private Button btnShowMessage;
      //private ImageView img; 
@@ -56,43 +56,41 @@ import android.widget.Toast;
       if(file.exists())
       {
   	    String stringVehiculo=leerVehiculo();
- 		Vehiculo vehiculo=new Vehiculo(stringVehiculo);
-    	  Toast.makeText(getBaseContext(),"Ya existe un vehículo si le da a guardar se actualizaran los datos \n"+vehiculo.toString(), Toast.LENGTH_LONG).show();
+ 		Vehiculo vehiculo;
+		try {
+			vehiculo = new Vehiculo(stringVehiculo);
+			  Toast.makeText(getBaseContext(),"Ya existe un vehículo si le da a guardar se actualizaran los datos \n"+vehiculo.toString(), Toast.LENGTH_LONG).show();
+		} catch (MatriculaVehiculoException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getBaseContext(),"Matricula incorrecta del vehículo guardado, actualice los datos", Toast.LENGTH_LONG).show();
+		}
+    	
       }
 
 
-         btnShowMessage.setOnClickListener(new View.OnClickListener() {
-             public void onClick(View v) {
-         //   	   Pattern p = Pattern.compile("(\\d{4}-[\\D\\w]{3}|[\\D\\w]{1,2}-\\d{4}-[\\D\\w]{2})");
-         //   	      Matcher m = p.matcher(id_matricula.getText());
-         //   	      if (!m.find()){
-          //  	    	  Toast.makeText(getBaseContext(),"Matricula incorrecta, introduzca formato válido", Toast.LENGTH_LONG).show();            	      
-          //  	    }
-           //  else{
-             /*    String str =  id_vehiculo.getText().toString()+" "+id_modelo.getText().toString()
-                 +" "+ id_marca.getText().toString()+ ""+id_color.getText().toString()
-                 +
-                     "!";*/
-                 //Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
-            	 Vehiculo vehi=new Vehiculo(id_vehiculo.getText().toString(), id_matricula.getText().toString());
-                 if (vehi.isValida()==true)
-                 {
-                		//-- ,id_marca.getText().toString()
-                		//-- ,id_modelo.getText().toString(),id_color.getText().toString());
-                // Toast.makeText(getBaseContext(),vehi.getMarca(), Toast.LENGTH_LONG).show();  		 
-                 guardarVehiculo(vehi);    
-                 String stringVehiculo=leerVehiculo();
-         		Vehiculo vehiculo=new Vehiculo(stringVehiculo);
-   			 Toast.makeText(getBaseContext(),"Actualizado!!!\n"+vehiculo.toString(), Toast.LENGTH_LONG).show();
-             }
-                 else
-                	 Toast.makeText(getBaseContext(),"Formato de la matricula Incorrecto,Intentolo de nuevo!!!\n", Toast.LENGTH_LONG).show();
-             }
-             //}
-         });      
+      btnShowMessage.setOnClickListener(new View.OnClickListener() {
+          public void onClick(View v) {
+        	  Vehiculo vehi;
+        	  
+			try {
+				vehi = new Vehiculo(id_vehiculo.getText().toString(), id_matricula.getText().toString());
+	              guardarVehiculo(vehi);    
+	              String stringVehiculo=leerVehiculo();
+	      		Vehiculo vehiculo=new Vehiculo(stringVehiculo);
+				 Toast.makeText(getBaseContext(),"Actualizado!!!\n"+vehiculo.toString(), Toast.LENGTH_LONG).show();
+
+			} catch (MatriculaVehiculoException e) {
+				// TODO Auto-generated catch block
+				Toast.makeText(getBaseContext(),"Matricula incorrecta, introduzca formato válido", Toast.LENGTH_LONG).show();
+			}
+         	   
+
+          
+          }
+      });   
      
      }
-// }
+
  
  
  public void guardarVehiculo(Vehiculo vehiculo){
