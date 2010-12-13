@@ -66,10 +66,9 @@ public class HolaMundo1 extends MapActivity
 	       // GeoPoint puntoc = myLocationOverlay.getMyLocation();
 	       // mapController.setCenter(puntoc);
 	        
-	        cargarAvisos();
 	        
-	        //Muestra tráfico en carreteras
-	        //mapView.setTraffic(true);
+	        
+	        mapView.setTraffic(true);
 	        
 	      //ejemplo Radar fijo
 	        List<Overlay> mapOverlays = mapView.getOverlays();
