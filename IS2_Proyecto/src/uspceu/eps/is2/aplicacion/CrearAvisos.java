@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,9 +75,8 @@ public class CrearAvisos extends AplicacionMain {
 				try {
 					a = form.obtenerDatosFormulario(usu);
 					guardarAviso(a);
-
-					/* Pone los campos en blanco (quitar??) */
 					form.vaciarCampos();
+					volverAlMapa();
 				} catch (NombreAvisoException e) {
 					Toast
 							.makeText(CrearAvisos.this,
@@ -89,6 +89,7 @@ public class CrearAvisos extends AplicacionMain {
 									"Formato de las coordenadas incorrecto\nCompruebe que están en formato decimal (p ej: 40.38333)",
 									Toast.LENGTH_LONG).show();
 				}
+				
 
 			}
 		});
@@ -118,5 +119,9 @@ public class CrearAvisos extends AplicacionMain {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void volverAlMapa(){
+		this.startActivity(new Intent().setClass(this, HolaMundo1.class));
 	}
 }
