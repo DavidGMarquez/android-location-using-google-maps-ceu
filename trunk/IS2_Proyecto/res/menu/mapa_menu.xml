@@ -4,7 +4,7 @@
 
     <item android:id="@+id/crear_avisos"
           android:icon="@drawable/ic_crear"
-          android:title="Crear Aviso" />
+          android:title="Crear Aviso Aquí" />
           
     <item android:id="@+id/ver_avisos"
           android:icon="@drawable/ic_ver"
@@ -16,20 +16,10 @@
           
     <item android:id="@+id/mapa"
           android:icon="@drawable/ic_mapa"
-          android:title="Mapa Avisos" />
+          android:title="Recargar Mapa" />
           
     <item android:id="@+id/localizar"
           android:icon="@drawable/ic_usuario"
           android:title="Mi ubicacion" />
-          
-<!--    <item android:id="@+id/identificarse"-->
-<!--          android:icon="@drawable/car2"-->
-<!--          android:title="Identificarse" />-->
-
-<!--    
-	<item android:id="@+id/ID_ACTIVIDAD"
-          android:icon="@drawable/ICONO_ACTIVIDAD"
-          android:title="TÍTULO ACTIVIDAD" />
--->
 
 </menu>
