@@ -56,5 +56,17 @@ public class PuntoMapa {
 		}
 		return latitud + lat + ", " + longitud + lon;
 	}
+	
+	/* Devuelve la latitud en formato 1E6*/
+	public int latitudE6(){
+		Double lat=new Double(this.latitud).doubleValue();
+		return (int) (lat*1000000);
+	}
+	
+	/* Devuelve la longitud en formato 1E6*/
+	public int longitudE6(){
+		Double lon=new Double(this.longitud).doubleValue();
+		return (int) (lon*1000000);
+	}
 
 }

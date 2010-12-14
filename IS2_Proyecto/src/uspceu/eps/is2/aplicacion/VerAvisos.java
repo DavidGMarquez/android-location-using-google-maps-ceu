@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class VerAvisos extends ListActivity {
 
 	private ListView lv;
+	private Context lContext;
 
 	// Ids de las ventanas de elegir fecha y hora (para el switch)
 	static final int DATEINI_DIALOG_ID = 0;
@@ -37,46 +40,27 @@ public class VerAvisos extends ListActivity {
 	static final int HOURFIN_DIALOG_ID = 3;
 
 	// Valores actuales de los filtros
-	private int anioini, aniofin;
-	private int mesini, mesfin;
-	private int diaini, diafin;
-	private int horaini, horafin;
-	private int minutoini, minutofin;
-
-	private boolean filtrofecha;
-
-	static final int USER_DIALOG_ID = 4;
-	private String usu;
-	private boolean filtrousuario;
+	private FiltroFecha filtro_fecha;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		lContext=this;
+		
+		// Pone las fechas del filtro por defecto a la fecha actual
+		Calendar c = Calendar.getInstance();
+		this.filtro_fecha = new FiltroFecha(c);
+		
 		setContentView(R.layout.lista_avisos);
 		this.lv = getListView();
 		lv.setTextFilterEnabled(true);
 		this.cargarLista(lv);
 
-		// Pone las fechas del filtro por defecto a la fecha actual
-		Calendar c = Calendar.getInstance();
-		this.anioini = c.get(Calendar.YEAR);
-		this.mesini = c.get(Calendar.MONTH);
-		this.diaini = c.get(Calendar.DATE);
-		this.horaini = c.get(Calendar.HOUR_OF_DAY);
-		this.minutoini = c.get(Calendar.MINUTE);
-		this.aniofin = this.anioini;
-		this.mesfin = this.mesini;
-		this.diafin = this.diaini;
-		this.horafin = this.horaini;
-		this.minutofin = this.minutoini;
-
-		this.filtrofecha = false;
-
-		usu = "";
-		this.filtrousuario = false;
 	}
 
+	
+	
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		this.cargarLista(lv);
@@ -114,10 +98,6 @@ public class VerAvisos extends ListActivity {
 			showDialog(DATEINI_DIALOG_ID);
 			return true;
 
-			/*
-			 * case R.id.ID_ACTIVIDAD: this.startActivity(new
-			 * Intent().setClass(this, NOMBRE_ACTIVIDAD.class)); return true;
-			 */
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -128,10 +108,8 @@ public class VerAvisos extends ListActivity {
 
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
-			anioini = year;
-			mesini = monthOfYear;
-			diaini = dayOfMonth;
-			filtrofecha = true;
+			filtro_fecha.setFechaIni(year,monthOfYear,dayOfMonth);
+			filtro_fecha.setFiltroactivado(true);
 			showDialog(HOURINI_DIALOG_ID);
 		}
 	};
@@ -141,25 +119,21 @@ public class VerAvisos extends ListActivity {
 
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
-			aniofin = year;
-			mesfin = monthOfYear;
-			diafin = dayOfMonth;
+			filtro_fecha.setFechaFin(year,monthOfYear,dayOfMonth);
 			showDialog(HOURFIN_DIALOG_ID);
 		}
 	};
 
 	private TimePickerDialog.OnTimeSetListener iniTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			horaini = hourOfDay;
-			minutoini = minute;
+			filtro_fecha.setHoraIni(hourOfDay, minute);
 			showDialog(DATEFIN_DIALOG_ID);
 		}
 	};
 
 	private TimePickerDialog.OnTimeSetListener finTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			horafin = hourOfDay;
-			minutofin = minute;
+			filtro_fecha.setHoraFin(hourOfDay, minute);
 			cargarLista(lv);
 		}
 	};
@@ -174,31 +148,13 @@ public class VerAvisos extends ListActivity {
 					.makeText(VerAvisos.this, R.string.noavisos,
 							Toast.LENGTH_LONG).show();
 		} else {
-			if (filtrofecha == true) {
-				Date dini = new Date();
-				dini.setDate(this.diaini);
-				dini.setMonth(this.mesini);
-				dini.setYear(this.anioini - 1900);
-				dini.setHours(this.horaini);
-				dini.setMinutes(this.minutoini);
-				Date dfin = new Date();
-				dfin.setDate(this.diafin);
-				dfin.setMonth(this.mesfin);
-				dfin.setYear(this.aniofin - 1900);
-				dfin.setHours(this.horafin);
-				dfin.setMinutes(this.minutofin);
-
+			if (filtro_fecha.isFiltroactivado() == true) {
 				for (int i = 0; i < avisoarray.size(); i++) {
 					Date d = ((Aviso) avisoarray.get(i)).getFechacreacion();
-					dini.setSeconds(d.getSeconds());
-					dfin.setSeconds(d.getSeconds());
-					// Elimina de la lista los elementos que no pasen el filtro
-					if (d.before(dini) || d.after(dfin)) {
+					if (!filtro_fecha.isFechaValida(d))
 						avisoarray.remove(i);
 						i--;
-					}
 				}
-
 			}
 		}
 
@@ -209,9 +165,13 @@ public class VerAvisos extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Aviso a = avisoarray.get((int) id);
-				Toast
-						.makeText(VerAvisos.this, a.toMostrar(),
-								Toast.LENGTH_LONG).show();
+				AlertDialog.Builder dialog = new AlertDialog.Builder(lContext);
+				  dialog.setTitle(a.getNombreAviso());
+				  dialog.setMessage(a.toMostrar());
+				  dialog.show();
+//				Toast
+//						.makeText(VerAvisos.this, a.toMostrar(),
+//								Toast.LENGTH_LONG).show();
 			}
 		});
 
@@ -222,26 +182,26 @@ public class VerAvisos extends ListActivity {
 		Dialog t = null;
 		switch (id) {
 		case DATEINI_DIALOG_ID:
-			t = new DatePickerDialog(this, iniDateSetListener, anioini, mesini,
-					diaini);
+			t = new DatePickerDialog(this, iniDateSetListener, filtro_fecha.getAnioini(), filtro_fecha.getMesini(),
+					filtro_fecha.getDiaini());
 			t.setTitle(R.string.filtro_fechaini);
 			break;
 
 		case DATEFIN_DIALOG_ID:
-			t = new DatePickerDialog(this, finDateSetListener, aniofin, mesfin,
-					diafin);
+			t = new DatePickerDialog(this, finDateSetListener, filtro_fecha.getAniofin(), filtro_fecha.getMesfin(),
+					filtro_fecha.getDiafin());
 			t.setTitle(R.string.filtro_fechafin);
 			break;
 			
 		case HOURINI_DIALOG_ID:
-			t = new TimePickerDialog(this, iniTimeSetListener, horaini,
-					minutoini, true);
+			t = new TimePickerDialog(this, iniTimeSetListener, filtro_fecha.getHoraini(),
+					filtro_fecha.getMinutoini(), true);
 			t.setTitle(R.string.filtro_horaini);
 			break;
 			
 		case HOURFIN_DIALOG_ID:
-			t = new TimePickerDialog(this, finTimeSetListener, horafin,
-					minutofin, true);
+			t = new TimePickerDialog(this, finTimeSetListener, filtro_fecha.getHorafin(),
+					filtro_fecha.getMinutofin(), true);
 			t.setTitle(R.string.filtro_horafin);
 			break;
 		}
