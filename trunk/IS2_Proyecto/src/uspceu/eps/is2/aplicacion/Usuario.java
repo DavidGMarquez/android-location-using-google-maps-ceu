@@ -1,6 +1,9 @@
 package uspceu.eps.is2.aplicacion;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
+
 	private String nombre;
 	private String password;
 	

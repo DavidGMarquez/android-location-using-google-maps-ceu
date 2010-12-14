@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import uspceu.eps.is2.AndroidServer.SerializadorServidor;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -95,47 +97,8 @@ public class HolaMundo1 extends MapActivity {
 
 	/* Carga los avisos a un array de Avisos */
 	public ArrayList<Aviso> cargarAvisos() {
-		ArrayList<Aviso> al = new ArrayList<Aviso>();
-		int numlins = -1;
-		String aux = "";
-		ArrayList<String> stringarray = new ArrayList<String>();
-
-		/* Lee los Avisos del fichero */
-		try {
-			InputStreamReader isr = new InputStreamReader(
-					openFileInput("avisos_guardados"));
-			BufferedReader br = new BufferedReader(isr);
-			do {
-				numlins++;
-				aux = br.readLine();
-				if (aux != null)
-					stringarray.add(aux + '\n');
-			} while (aux != null);
-			br.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		/* Guarda los Avisos en el array */
-		int i = 0, ai = 0;
-		aux = "";
-		for (i = 0; i < numlins; i++) {
-			aux += stringarray.get(i);
-			if ((i + 1) % 8 == 0) {
-				ai++;
-				Aviso a;
-				try {
-					a = new Aviso(aux);
-					al.add(a);
-				} catch (FormatoCoordenadasException e) {
-
-				}
-				aux = "";
-			}
-		}
-		return al;
+		SerializadorServidor serializadorServidor=new SerializadorServidor("10.0.2.2");
+		return serializadorServidor.obtenerAvisos();
 	}
 
 	public ArrayList<Aviso> filtrarAvisosFecha() {
