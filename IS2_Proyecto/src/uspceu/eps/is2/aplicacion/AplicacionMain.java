@@ -59,29 +59,10 @@ public class AplicacionMain extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
-        case R.id.ver_avisos:
-        	
-            this.startActivity(new Intent().setClass(this, VerAvisos.class));
-            return true;
-        case R.id.crear_avisos:
-        	
-        	this.startActivity(new Intent().setClass(this, CrearAvisos.class));
-        	return true;
-        
-        case R.id.alta_vehiculo:
-        	this.startActivity(new Intent().setClass(this, AltaVehiculo.class));
-        	return true;
-        	
+        switch (item.getItemId()) {	
         case R.id.mapa:
         	this.startActivity(new Intent().setClass(this, HolaMundo1.class));
-        	return true;
-        	
-        	
-      /*case R.id.ID_ACTIVIDAD:
-        	this.startActivity(new Intent().setClass(this, NOMBRE_ACTIVIDAD.class));
-        	return true;
-      */        	
+        	return true;   	
         default:
             return super.onOptionsItemSelected(item);
         }
