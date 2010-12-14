@@ -21,5 +21,8 @@
     <item android:id="@+id/localizar"
           android:icon="@drawable/ic_usuario"
           android:title="Mi ubicacion" />
+    <item android:id="@+id/filtrofecha"
+          android:icon="@drawable/ic_fecha"
+          android:title="Filtrar por fechas" />
 
 </menu>
