@@ -78,10 +78,10 @@ public class HolaMundo1 extends MapActivity
 	        
 	        ArrayList<Aviso> avisosmostrar = new ArrayList<Aviso>();
 	        
-	        cargarAvisos(avisosmostrar);
-	        
-	        ((avisosmostrar.get(1)).getPuntoMapa()).getLatitud();
-	        ((avisosmostrar.get(1)).getPuntoMapa()).getLongitud();
+	       // cargarAvisos(avisosmostrar);
+	         
+	       // int LatitudINT = Integer.parseInt(((avisosmostrar.get(1)).getPuntoMapa()).getLatitud());
+	       // int LongitudINT = Integer.parseInt(((avisosmostrar.get(1)).getPuntoMapa()).getLongitud());
 	        
 	        
 	      //ejemplo Radar fijo
