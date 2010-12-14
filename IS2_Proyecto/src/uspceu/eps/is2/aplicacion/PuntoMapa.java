@@ -1,6 +1,8 @@
 package uspceu.eps.is2.aplicacion;
 
-public class PuntoMapa {
+import java.io.Serializable;
+
+public class PuntoMapa implements Serializable{
 	private String latitud;
 	private String longitud;
 

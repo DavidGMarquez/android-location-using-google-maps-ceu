@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import uspceu.eps.is2.AndroidServer.SerializadorServidor;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -96,19 +98,10 @@ public class CrearAvisos extends AplicacionMain {
 	}
 
 	/* Guarda el aviso creado */
-	public void guardarAviso(Aviso a) {
-		FileOutputStream fos;
-		try {
-			fos = openFileOutput("avisos_guardados", Context.MODE_APPEND);
-			fos.write((a.toCompleto() + "\n").getBytes());
-			fos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Toast.makeText(CrearAvisos.this, "Aviso Guardado", Toast.LENGTH_LONG)
-				.show();
+	public void guardarAviso(Aviso aviso) {
+		SerializadorServidor serializador=new SerializadorServidor("10.0.2.2");
+		serializador.enviarAviso(aviso);
+			
 	}
 
 	@Override

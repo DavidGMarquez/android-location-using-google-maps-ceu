@@ -4,6 +4,7 @@
 package uspceu.eps.is2.aplicacion;
 
 //import java.text.SimpleDateFormat;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
  * @author Cayette
  *
  */
-public class Aviso {
+public class Aviso implements Serializable {
 
 
 	private String nombreAviso;
