@@ -174,42 +174,49 @@ public void cargarAvisos(ArrayList<Aviso> al) {
 	   
 		
 	    @Override
-	    public boolean onOptionsItemSelected(MenuItem item) {
-	        // Handle item selection
-	        switch (item.getItemId()) {
-	        case R.id.ver_avisos:
-	        	
-	            this.startActivity(new Intent().setClass(this, VerAvisos.class));
-	            return true;
-	        case R.id.crear_avisos:
-	        	
-	        	Intent intent=new Intent();
-	        	Double lati=new Double((double)myLocationOverlay.getMyLocation().getLatitudeE6()/1000000);
-	        	Double longi=new Double((double)myLocationOverlay.getMyLocation().getLongitudeE6()/1000000);
-	        	intent.putExtra("lat",lati.toString());
-	        	intent.putExtra("lon",longi.toString());
-	        	this.startActivity(intent.setClass(this, CrearAvisos.class));
-	        	return true;
-	        
-	        case R.id.alta_vehiculo:
-	        	this.startActivity(new Intent().setClass(this, AltaVehiculo.class));
-	        	return true;
-	        	
-	        case R.id.mapa:
-	        	this.startActivity(new Intent().setClass(this, HolaMundo1.class));
-	        	return true;
-	        	
-	        case R.id.localizar:
-	        	mapController.animateTo(myLocationOverlay.getMyLocation());
-	        	return true;
-	        	
-	      /*case R.id.ID_ACTIVIDAD:
-	        	this.startActivity(new Intent().setClass(this, NOMBRE_ACTIVIDAD.class));
-	        	return true;
-	      */        	
-	        default:
-	            return super.onOptionsItemSelected(item);
-	        }
-	    }
-	    
+		public boolean onOptionsItemSelected(MenuItem item) {
+			// Handle item selection
+			switch (item.getItemId()) {
+			case R.id.ver_avisos:
+
+				this.startActivity(new Intent().setClass(this, VerAvisos.class));
+				return true;
+			case R.id.crear_avisos:
+
+				if (myLocationOverlay.getMyLocation() == null)
+					Toast.makeText(this, R.string.noubicacion, Toast.LENGTH_LONG)
+							.show();
+				else {
+					Intent intent = new Intent();
+					Double lati = new Double((double) myLocationOverlay
+							.getMyLocation().getLatitudeE6() / 1000000);
+					Double longi = new Double((double) myLocationOverlay
+							.getMyLocation().getLongitudeE6() / 1000000);
+					intent.putExtra("lat", lati.toString());
+					intent.putExtra("lon", longi.toString());
+					this.startActivity(intent.setClass(this, CrearAvisos.class));
+				}
+				return true;
+
+			case R.id.alta_vehiculo:
+				this.startActivity(new Intent().setClass(this, AltaVehiculo.class));
+				return true;
+
+			case R.id.mapa:
+				this.startActivity(new Intent().setClass(this, HolaMundo1.class));
+				return true;
+
+			case R.id.localizar:
+				if (myLocationOverlay.getMyLocation() == null)
+					Toast.makeText(this, R.string.noubicacion, Toast.LENGTH_LONG)
+							.show();
+				else {
+					mapController.animateTo(myLocationOverlay.getMyLocation());
+				}
+				return true;
+
+			default:
+				return super.onOptionsItemSelected(item);
+			}
+		}	    
 }
