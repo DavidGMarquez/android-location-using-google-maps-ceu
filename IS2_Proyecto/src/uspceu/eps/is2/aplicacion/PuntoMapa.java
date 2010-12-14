@@ -15,7 +15,7 @@ public class PuntoMapa {
 	public String getLongitud() {
 		return longitud;
 	}
-
+	
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
