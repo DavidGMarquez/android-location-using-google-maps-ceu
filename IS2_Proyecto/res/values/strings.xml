@@ -4,6 +4,7 @@
     <string name="app_name">Proyecto IS2</string>
     <string name="sinregistrar">\nPara usar la aplicación se requiere una cuenta de gmail.\n</string>
     <string name="noavisos">No existen avisos creados</string>
+    <string name="noubicacion">Espere a que se cargue su ubicación</string>
     <string name="nousuarios">Sin espacios y \nentre 6 y 20 caracteres...\n...por favor</string>
     <string name=".IndentificarUsuario">Identificar Usuario</string>
     <string name="btn_showMessage">Identificarse</string>
