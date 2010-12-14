@@ -25,16 +25,16 @@ public final class R {
         public static final int usupng=0x7f02000b;
     }
     public static final class id {
-        public static final int alta_vehiculo=0x7f06001b;
+        public static final int alta_vehiculo=0x7f06001c;
         public static final int btn_showMessage=0x7f060005;
         public static final int container=0x7f060014;
-        public static final int crear_avisos=0x7f060019;
+        public static final int crear_avisos=0x7f06001a;
         public static final int descprompt=0x7f060009;
         public static final int editdesc=0x7f06000a;
         public static final int editlat=0x7f06000c;
         public static final int editlon=0x7f06000e;
         public static final int editname=0x7f060008;
-        public static final int filtrofecha=0x7f06001c;
+        public static final int filtrofecha=0x7f060019;
         public static final int formalta=0x7f060000;
         public static final int formcrear=0x7f060006;
         public static final int formidentificacion=0x7f060011;
@@ -52,7 +52,7 @@ public final class R {
         public static final int ppal=0x7f060015;
         public static final int save=0x7f060010;
         public static final int sep=0x7f06000f;
-        public static final int ver_avisos=0x7f06001a;
+        public static final int ver_avisos=0x7f06001b;
         public static final int verav=0x7f060018;
         public static final int zoom_holder=0x7f060017;
     }
