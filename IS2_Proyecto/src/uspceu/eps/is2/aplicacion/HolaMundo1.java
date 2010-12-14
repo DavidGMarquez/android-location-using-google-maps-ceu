@@ -41,6 +41,7 @@ public class HolaMundo1 extends MapActivity {
 
 	private List<Overlay> mapOverlays;
 	private ArrayList<Aviso> avisos;
+	private HelloItemizedOverlay overlay_avisos;
 
 	// Ids de las ventanas de elegir fecha y hora (para el switch)
 	static final int DATEINI_DIALOG_ID = 0;
@@ -57,51 +58,39 @@ public class HolaMundo1 extends MapActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().setFormat(PixelFormat.TRANSPARENT);
-		// Inflate our UI from its XML layout description.
 		setContentView(R.layout.mapa);
 		mapView = (MapView) findViewById(R.id.mapa);
 
-		// añade mi localización al mapa
+		mapOverlays = mapView.getOverlays();
+		
+		
+		//Busca la ubicación del usuario
 		myLocationOverlay = new MyLocationOverlay(this, mapView);
 		myLocationOverlay.enableMyLocation();
-		mapView.getOverlays().add(myLocationOverlay);
-
-		// Poner brújula
+		mapOverlays.add(myLocationOverlay);
 		myLocationOverlay.enableCompass();
-
-		// Poner botones de zoom
-		mapController = mapView.getController();
-		mapView.setBuiltInZoomControls(true);
-
-		// CENTRAR PANTALLA, faltaría poner un layout con el botón
-		// GeoPoint puntoc = myLocationOverlay.getMyLocation();
-		// mapController.setCenter(puntoc);
-
-		mapView.setTraffic(true);
-
-		Drawable dr_radar = this.getResources().getDrawable(R.drawable.radar);
-		// Drawable dr_alcohol =
-		// this.getResources().getDrawable(R.drawable.alcohol);
-
-		Calendar c = Calendar.getInstance();
-		this.filtro_fecha = new FiltroFecha(c);
-
-		avisos = cargarAvisos();
-
-		mapOverlays = mapView.getOverlays();
-		mapOverlays.add(this.ponerIconosAvisos(avisos, dr_radar));
-
-		// truquito lo haces correr cuando fija su posición de otra forma nunca
-		// funciona
 		myLocationOverlay.runOnFirstFix(new Runnable() {
 			public void run() {
 				mapController.animateTo(myLocationOverlay.getMyLocation());
 			}
 		});
+	
 
-		// Fijar el zoom
+		// Poner botones de zoom y tráfico
+		mapController = mapView.getController();
+		mapView.setBuiltInZoomControls(true);
+		mapView.setTraffic(true);
 		mapController.setZoom(10);
 
+		// Inicialización del filtro
+		Calendar c = Calendar.getInstance();
+		this.filtro_fecha = new FiltroFecha(c);
+
+		// Se cargan TODOS los avisos y la ubicación del usuario
+		avisos = cargarAvisos();
+		overlay_avisos=this.ponerIconosAvisos(avisos, getResources()
+				.getDrawable(R.drawable.radar));
+		mapOverlays.add(overlay_avisos);
 	}
 
 	/* Carga los avisos a un array de Avisos */
@@ -214,7 +203,7 @@ public class HolaMundo1 extends MapActivity {
 			return true;
 
 		case R.id.alta_vehiculo:
-			this.startActivity(new Intent().setClass(this, AltaVehiculo.class));
+			 this.startActivity(new Intent().setClass(this,AltaVehiculo.class));
 			return true;
 
 		case R.id.mapa:
@@ -227,12 +216,12 @@ public class HolaMundo1 extends MapActivity {
 						.show();
 			else {
 				mapController.animateTo(myLocationOverlay.getMyLocation());
-				mapView.getOverlays().add(myLocationOverlay);
+				if (!mapOverlays.contains(myLocationOverlay))
+					mapOverlays.add(myLocationOverlay);
 			}
 			return true;
 
 		case R.id.filtrofecha:
-			mapOverlays.clear();
 			showDialog(DATEINI_DIALOG_ID);
 			return true;
 
@@ -272,9 +261,9 @@ public class HolaMundo1 extends MapActivity {
 	private TimePickerDialog.OnTimeSetListener finTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			filtro_fecha.setHoraFin(hourOfDay, minute);
-			mapOverlays.add(myLocationOverlay);
-			mapOverlays.add(ponerIconosAvisos(filtrarAvisosFecha(),
-					getResources().getDrawable(R.drawable.radar)));
+			mapOverlays.remove(overlay_avisos);
+			overlay_avisos=ponerIconosAvisos(filtrarAvisosFecha(), getResources().getDrawable(R.drawable.radar));
+			mapOverlays.add(overlay_avisos);
 		}
 	};
 
