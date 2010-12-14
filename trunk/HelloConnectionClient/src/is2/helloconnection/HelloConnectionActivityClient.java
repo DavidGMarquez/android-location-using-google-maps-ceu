@@ -78,7 +78,41 @@ public class HelloConnectionActivityClient extends Activity {
 										socket.getOutputStream())), true);
 						// where you issue the commands
 						MiObjectOutputStream objectOutputStream= new MiObjectOutputStream(socket.getOutputStream());
+						char option='N';
+						objectOutputStream.writeChar(option);
+						objectOutputStream.flush();
+						objectOutputStream.notifyAll();
+						
+						Log.d("ClientActivity", "C: Send command ."+ option);
+						
+						if(option=='A'){
 						objectOutputStream.writeObject(new Aviso(clientSays.getText().toString(),clientSays.getText().toString()));
+						}
+						else{
+							if(option=='N'){
+								MiObjectInputStream objectInputStream = new MiObjectInputStream(
+										socket.getInputStream());								
+								Log.d("ClientActivityList", "C: Sending request List.");
+
+								Object avisoObject = null;
+								Aviso aviso = null;
+								String lista=new String();
+
+								while ((avisoObject = objectInputStream
+										.readObject()) != null) {
+									Log.d("ClientActivityList", "Recibido");
+									if (avisoObject instanceof Aviso) {
+										aviso = (Aviso) avisoObject;
+										Log.d("ClientActivityList","ServerActivity"
+												+ aviso.getNombreAviso());
+										lista=new String(lista.concat(aviso.getNombreAviso()));
+									} else {
+										System.out
+												.println("Objeto recibido no aviso");
+									}
+								}
+							}
+						}
 //						out.println(clientSays.getText().toString());
 						Log.d("ClientActivity", "C: Sent.");
 					} catch (Exception e) {
