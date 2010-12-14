@@ -183,7 +183,12 @@ public void cargarAvisos(ArrayList<Aviso> al) {
 	            return true;
 	        case R.id.crear_avisos:
 	        	
-	        	this.startActivity(new Intent().setClass(this, CrearAvisos.class));
+	        	Intent intent=new Intent();
+	        	Double lati=new Double((double)myLocationOverlay.getMyLocation().getLatitudeE6()/1000000);
+	        	Double longi=new Double((double)myLocationOverlay.getMyLocation().getLongitudeE6()/1000000);
+	        	intent.putExtra("lat",lati.toString());
+	        	intent.putExtra("lon",longi.toString());
+	        	this.startActivity(intent.setClass(this, CrearAvisos.class));
 	        	return true;
 	        
 	        case R.id.alta_vehiculo:
