@@ -1,5 +1,10 @@
 package uspceu.eps.is2.aplicacion;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -70,6 +76,14 @@ public class HolaMundo1 extends MapActivity
 	        
 	        mapView.setTraffic(true);
 	        
+	        ArrayList<Aviso> avisosmostrar = new ArrayList<Aviso>();
+	        
+	        cargarAvisos(avisosmostrar);
+	        
+	        ((avisosmostrar.get(1)).getPuntoMapa()).getLatitud();
+	        ((avisosmostrar.get(1)).getPuntoMapa()).getLongitud();
+	        
+	        
 	      //ejemplo Radar fijo
 	        List<Overlay> mapOverlays = mapView.getOverlays();
 	        Drawable drawable =	this.getResources().getDrawable(R.drawable.radar);
@@ -101,6 +115,49 @@ public class HolaMundo1 extends MapActivity
    
 	    }
 	 
+/* Carga los avisos a un array de Avisos */
+public void cargarAvisos(ArrayList<Aviso> al) {
+
+			int numlins = -1;
+			String aux = "";
+			ArrayList<String> stringarray = new ArrayList<String>();
+
+			/* Lee los Avisos del fichero */
+			try {
+				InputStreamReader isr = new InputStreamReader(
+						openFileInput("avisos_guardados"));
+				BufferedReader br = new BufferedReader(isr);
+				do {
+					numlins++;
+					aux = br.readLine();
+					if (aux != null)
+						stringarray.add(aux + '\n');
+				} while (aux != null);
+				br.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			/* Guarda los Avisos en el array */
+			int i = 0, ai = 0;
+			aux = "";
+			for (i = 0; i < numlins; i++) {
+				aux += stringarray.get(i);
+				if ((i + 1) % 8 == 0) {
+					ai++;
+					Aviso a;
+					try {
+						a = new Aviso(aux);
+						al.add(a);
+					} catch (FormatoCoordenadasException e) {
+						
+					}
+					aux = "";
+				}
+			}
+		}
 	 
 	    @Override
 	    protected boolean isRouteDisplayed() {
