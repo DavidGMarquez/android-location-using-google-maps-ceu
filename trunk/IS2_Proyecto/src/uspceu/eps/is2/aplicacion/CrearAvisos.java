@@ -99,7 +99,7 @@ public class CrearAvisos extends AplicacionMain {
 
 	/* Guarda el aviso creado */
 	public void guardarAviso(Aviso aviso) {
-		SerializadorServidor serializador=new SerializadorServidor("10.0.2.2");
+		SerializadorServidor serializador=new SerializadorServidor();
 		serializador.enviarAviso(aviso);
 			
 	}

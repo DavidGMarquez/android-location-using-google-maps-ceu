@@ -15,13 +15,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class SerializadorServidor {
-	private String serverIp = "10.0.2.2";
+	private String serverIp = "172.23.12.234";
 	private String serverIpAddress = "";
 	private boolean connected = false;
 
 	public SerializadorServidor(String serverIp) {
 		super();
 		this.serverIp = serverIp;
+	}
+	public SerializadorServidor() {
+		super();
+	
 	}
 
 	protected void conectar() {
