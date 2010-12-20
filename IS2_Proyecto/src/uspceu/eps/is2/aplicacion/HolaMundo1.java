@@ -97,7 +97,7 @@ public class HolaMundo1 extends MapActivity {
 
 	/* Carga los avisos a un array de Avisos */
 	public ArrayList<Aviso> cargarAvisos() {
-		SerializadorServidor serializadorServidor=new SerializadorServidor("10.0.2.2");
+		SerializadorServidor serializadorServidor=new SerializadorServidor();
 		return serializadorServidor.obtenerAvisos();
 	}
 
