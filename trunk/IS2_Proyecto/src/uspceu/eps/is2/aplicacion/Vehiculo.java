@@ -47,9 +47,9 @@ public class Vehiculo {
 	{
 		this.descripcion=descripcion;
 		this.matricula=new MatriculaVehiculo(matricula);
-		if(!this.matricula.isCorrectSpain()){			
+/*		if(!this.matricula.isCorrectSpain()){			
 			throw   new MatriculaVehiculoException("Formato Matrícula incorrecto");
-		}
+		}*/
 	}
 	public String getMarca() {
 		return marca;
