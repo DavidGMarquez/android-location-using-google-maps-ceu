@@ -98,7 +98,7 @@ public class HolaMundo1 extends MapActivity {
 		mapOverlays.add(overlay_avisos);
 		}
 		else{
-			Toast.makeText(this, "Servidor no disponible intentelo más tarde", Toast.LENGTH_LONG)
+			Toast.makeText(this, R.string.noservidor, Toast.LENGTH_LONG)
 			.show();
 		}
 	}
@@ -154,7 +154,9 @@ public class HolaMundo1 extends MapActivity {
 		switch (item.getItemId()) {
 		case R.id.ver_avisos:
 
-			this.startActivity(new Intent().setClass(this, VerAvisos.class));
+			Intent intent2 = new Intent();
+			intent2.putExtra("avis", this.avisos);
+			this.startActivity(intent2.setClass(this, VerAvisos.class));
 			return true;
 		case R.id.crear_avisos:
 
@@ -179,7 +181,7 @@ public class HolaMundo1 extends MapActivity {
 
 		case R.id.mapa:
 			ProgressDialog dialog = ProgressDialog.show(HolaMundo1.this, "", 
-	                "Loading. Please wait...", true);
+					"Cargando avisos. Espere un momento, por favor...", true);
 			this.startActivity(new Intent().setClass(this, HolaMundo1.class));
 			return true;
 
