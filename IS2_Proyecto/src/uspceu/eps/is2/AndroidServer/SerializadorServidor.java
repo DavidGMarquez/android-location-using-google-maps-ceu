@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class SerializadorServidor {
-	private String serverIp = "172.23.12.235";
+	private String serverIp = "10.0.2.2";
 	private String serverIpAddress = "";
 	private boolean connected = false;
 

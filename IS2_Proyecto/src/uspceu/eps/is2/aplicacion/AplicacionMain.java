@@ -7,6 +7,7 @@ import java.io.IOException;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,6 +62,8 @@ public class AplicacionMain extends Activity {
         // Handle item selection
         switch (item.getItemId()) {	
         case R.id.mapa:
+    		ProgressDialog dialog = ProgressDialog.show(AplicacionMain.this, "", 
+                    "Loading. Please wait...", true);
         	this.startActivity(new Intent().setClass(this, HolaMundo1.class));
         	return true;   	
         default:
