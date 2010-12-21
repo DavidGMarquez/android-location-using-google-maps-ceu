@@ -5,6 +5,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 import uspceu.eps.is2.aplicacion.Aviso;
@@ -15,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class SerializadorServidor {
-	private String serverIp = "172.23.12.234";
+	private String serverIp = "172.23.12.235";
 	private String serverIpAddress = "";
 	private boolean connected = false;
 
@@ -119,7 +120,13 @@ public class SerializadorServidor {
 			socket.close();
 			Log.d("ClientActivity", "C: Closed.");
 			connected = false;
-		} catch (Exception e) {
+		}catch (SocketException e) {
+			connected = false;
+			Log.e("ClientActivity", "C: Error", e);
+			return null;
+
+		}
+		catch (Exception e) {
 			connected = false;
 			Log.e("ClientActivity", "C: Error", e);
 

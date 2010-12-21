@@ -90,9 +90,16 @@ public class HolaMundo1 extends MapActivity {
 
 		// Se cargan TODOS los avisos y la ubicación del usuario
 		avisos = cargarAvisos();
+		if(avisos!=null)
+		{
 		overlay_avisos=this.ponerIconosAvisos(avisos, getResources()
 				.getDrawable(R.drawable.radar));
 		mapOverlays.add(overlay_avisos);
+		}
+		else{
+			Toast.makeText(this, "Servidor no disponible intentelo más tarde", Toast.LENGTH_LONG)
+			.show();
+		}
 	}
 
 	/* Carga los avisos a un array de Avisos */
