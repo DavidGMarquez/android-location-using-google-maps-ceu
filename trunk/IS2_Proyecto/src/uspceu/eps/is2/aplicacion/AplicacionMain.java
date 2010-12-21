@@ -63,7 +63,7 @@ public class AplicacionMain extends Activity {
         switch (item.getItemId()) {	
         case R.id.mapa:
     		ProgressDialog dialog = ProgressDialog.show(AplicacionMain.this, "", 
-                    "Loading. Please wait...", true);
+                    "Cargando avisos. Espere un momento, por favor...", true);
         	this.startActivity(new Intent().setClass(this, HolaMundo1.class));
         	return true;   	
         default:

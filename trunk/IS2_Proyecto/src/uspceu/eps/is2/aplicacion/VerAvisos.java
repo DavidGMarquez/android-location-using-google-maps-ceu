@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -31,6 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class VerAvisos extends ListActivity {
 
 	private ListView lv;
+	private ArrayList<Aviso> avisoarray;
 	private Context lContext;
 
 	// Ids de las ventanas de elegir fecha y hora (para el switch)
@@ -51,6 +54,9 @@ public class VerAvisos extends ListActivity {
 		// Pone las fechas del filtro por defecto a la fecha actual
 		Calendar c = Calendar.getInstance();
 		this.filtro_fecha = new FiltroFecha(c);
+		
+		Bundle extras = getIntent().getExtras();
+		avisoarray=(ArrayList<Aviso>) extras.get("avis");
 		
 		setContentView(R.layout.lista_avisos);
 		this.lv = getListView();
@@ -139,10 +145,7 @@ public class VerAvisos extends ListActivity {
 	};
 
 	private void cargarLista(ListView lv) {
-
-		final ArrayList<Aviso> avisoarray = new ArrayList<Aviso>();
-		this.cargarAvisos(avisoarray);
-
+		ArrayList<Aviso> avisoarray_aux=new ArrayList<Aviso>();
 		if (avisoarray.isEmpty()) {
 			Toast
 					.makeText(VerAvisos.this, R.string.noavisos,
@@ -150,28 +153,30 @@ public class VerAvisos extends ListActivity {
 		} else {
 			if (filtro_fecha.isFiltroactivado() == true) {
 				for (int i = 0; i < avisoarray.size(); i++) {
-					Date d = ((Aviso) avisoarray.get(i)).getFechacreacion();
-					if (!filtro_fecha.isFechaValida(d))
-						avisoarray.remove(i);
-						i--;
+					Aviso av=(Aviso) avisoarray.get(i);
+					Date d = av.getFechacreacion();
+					if (filtro_fecha.isFechaValida(d))
+						avisoarray_aux.add(av);
 				}
+				
 			}
+			else{
+				avisoarray_aux=avisoarray;
+			}
+			
 		}
-
+		final ArrayList<Aviso> avisoarray2=avisoarray_aux;
 		setListAdapter(new ArrayAdapter<Aviso>(this, R.layout.vista_lista,
-				avisoarray));
+				avisoarray2));
 		this.lv.setTextFilterEnabled(true);
 		this.lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Aviso a = avisoarray.get((int) id);
+				Aviso a = avisoarray2.get((int) id);
 				AlertDialog.Builder dialog = new AlertDialog.Builder(lContext);
 				  dialog.setTitle(a.getNombreAviso());
 				  dialog.setMessage(a.toMostrar());
 				  dialog.show();
-//				Toast
-//						.makeText(VerAvisos.this, a.toMostrar(),
-//								Toast.LENGTH_LONG).show();
 			}
 		});
 
@@ -206,50 +211,6 @@ public class VerAvisos extends ListActivity {
 			break;
 		}
 		return t;
-	}
-
-	/* Carga los avisos a un array de Avisos */
-	public void cargarAvisos(ArrayList<Aviso> al) {
-
-		int numlins = -1;
-		String aux = "";
-		ArrayList<String> stringarray = new ArrayList<String>();
-
-		/* Lee los Avisos del fichero */
-		try {
-			InputStreamReader isr = new InputStreamReader(
-					openFileInput("avisos_guardados"));
-			BufferedReader br = new BufferedReader(isr);
-			do {
-				numlins++;
-				aux = br.readLine();
-				if (aux != null)
-					stringarray.add(aux + '\n');
-			} while (aux != null);
-			br.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		/* Guarda los Avisos en el array */
-		int i = 0, ai = 0;
-		aux = "";
-		for (i = 0; i < numlins; i++) {
-			aux += stringarray.get(i);
-			if ((i + 1) % 8 == 0) {
-				ai++;
-				Aviso a;
-				try {
-					a = new Aviso(aux);
-					al.add(a);
-				} catch (FormatoCoordenadasException e) {
-					Toast.makeText(VerAvisos.this,"Ha habido un error al leer del archivo.\nLa lista puede estar incompleta",Toast.LENGTH_LONG).show();
-				}
-				aux = "";
-			}
-		}
 	}
 
 }
