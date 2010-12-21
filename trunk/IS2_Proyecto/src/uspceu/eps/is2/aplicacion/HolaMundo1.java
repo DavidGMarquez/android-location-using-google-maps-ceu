@@ -13,6 +13,7 @@ import uspceu.eps.is2.AndroidServer.SerializadorServidor;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -177,6 +178,8 @@ public class HolaMundo1 extends MapActivity {
 			return true;
 
 		case R.id.mapa:
+			ProgressDialog dialog = ProgressDialog.show(HolaMundo1.this, "", 
+	                "Loading. Please wait...", true);
 			this.startActivity(new Intent().setClass(this, HolaMundo1.class));
 			return true;
 
