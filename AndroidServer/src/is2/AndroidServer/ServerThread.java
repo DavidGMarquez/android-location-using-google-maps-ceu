@@ -13,6 +13,7 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Handler;
@@ -28,8 +29,23 @@ public class ServerThread implements Runnable {
 	// designate a port
 	public static final int SERVERPORT = 8080;
 	private ServerSocket serverSocket;
+	private int database=1;
+	private String databasename="avisos.db";
+	DatabaseHandler databasehandler;
+	
 
 	public void run() {
+		try {
+			databasehandler=new DatabaseHandler(databasename);
+			databasehandler.initDB();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 
 		SERVERIP = getLocalIpAddress();
 
@@ -189,6 +205,7 @@ public class ServerThread implements Runnable {
 	}
 	
 	public boolean guardarEnFichero(Aviso aviso) {
+		if(database==0){
 		System.out.println("Guardando en fichero");
 		try {
 			MiObjectOutputStream oos = new MiObjectOutputStream(
@@ -205,10 +222,22 @@ public class ServerThread implements Runnable {
 			e.printStackTrace();
 		}
 		return false;
+		}
+		else
+		{
+			
+			System.out.println("Guardando en base de datos");
+			databasehandler.addAviso(aviso);
+			return true;			
+			
+		}
 	}
 
 	public ArrayList<Aviso> cargarfichero() {
 		ArrayList<Aviso> avisos = new ArrayList<Aviso>();
+
+		if(database==0)
+		{
 		MiObjectInputStream ois;
 		try {
 			ois = new MiObjectInputStream(new FileInputStream(fichero));
@@ -237,6 +266,11 @@ public class ServerThread implements Runnable {
 			e.printStackTrace();
 		}
 		return avisos;
+		}
+		else
+		{
+			return databasehandler.getAvisos();
+		}
 
 	}
 
