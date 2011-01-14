@@ -16,9 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class SerializadorServidor {
-	private String serverIp = "10.0.2.2";
+	private String serverIp = "88.13.158.144";
 	private String serverIpAddress = "";
 	private boolean connected = false;
+	private int puerto=443;
 
 	public SerializadorServidor(String serverIp) {
 		super();
@@ -42,7 +43,7 @@ public class SerializadorServidor {
 		try {
 			InetAddress serverAddr = InetAddress.getByName(serverIpAddress);
 			Log.d("ClientActivity", "C: Connecting...");
-			Socket socket = new Socket(serverAddr, 8080);
+			Socket socket = new Socket(serverAddr, puerto);
 			connected = true;
 			if (connected) {
 				try {
@@ -81,7 +82,7 @@ public class SerializadorServidor {
 		try {
 			InetAddress serverAddr = InetAddress.getByName(serverIpAddress);
 			Log.d("ClientActivity", "C: Connecting...");
-			Socket socket = new Socket(serverAddr, 8080);
+			Socket socket = new Socket(serverAddr, puerto);
 			connected = true;
 			if (connected) {
 				try {

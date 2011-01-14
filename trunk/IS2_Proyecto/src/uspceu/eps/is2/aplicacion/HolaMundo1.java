@@ -91,7 +91,7 @@ public class HolaMundo1 extends MapActivity {
 
 		// Se cargan TODOS los avisos y la ubicación del usuario
 		avisos = cargarAvisos();
-		if(avisos!=null)
+		if(avisos.size()!=0)
 		{
 		overlay_avisos=this.ponerIconosAvisos(avisos, getResources()
 				.getDrawable(R.drawable.radar));
