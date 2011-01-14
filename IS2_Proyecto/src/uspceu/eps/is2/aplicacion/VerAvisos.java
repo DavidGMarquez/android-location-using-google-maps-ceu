@@ -2,6 +2,7 @@ package uspceu.eps.is2.aplicacion;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 import android.app.AlertDialog;
@@ -156,6 +157,7 @@ public class VerAvisos extends ListActivity {
 
 			} else {
 				avisoarray_aux = avisoarray;
+				 Collections.reverse(avisoarray_aux); 
 			}
 
 		}
