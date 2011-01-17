@@ -16,63 +16,20 @@ import uspceu.eps.is2.aplicacion.Vehiculo;
 import junit.framework.TestCase;
 
 public class TestMatriculas extends TestCase {
-	public void testCrearMatriculasNormal(){
-		Vehiculo vehiculo;	
-		String descripcion="Description";
+	public void testCrearMatriculasNormal() {
+		Vehiculo vehiculo;
+		String descripcion = "Description";
+
 		try {
-			vehiculo=new Vehiculo(descripcion, "AB-1234-ABC");
-			fail("Deberia no valer el formato");
+			vehiculo = new Vehiculo(descripcion, "CUALQUIERCOSA123");
 		} catch (MatriculaVehiculoException e) {
-			
-		}
+			fail("Debería valer el formato");
+		  }
+		
 		try {
-			vehiculo=new Vehiculo(descripcion, "ABCD-123");
-			fail("Deberia no valer el formato");
+			vehiculo = new Vehiculo(descripcion, "");
+			fail("Debería no valer el formato");
 		} catch (MatriculaVehiculoException e) {
-			
-		}
-		try {
-			vehiculo=new Vehiculo(descripcion, "1234-ABCD");
-			fail("Deberia no valer el formato");
-		} catch (MatriculaVehiculoException e) {
-			
-		}
-		try {
-			vehiculo=new Vehiculo(descripcion, "AB-1234-ABC");
-			fail("Deberia no valer el formato");
-		} catch (MatriculaVehiculoException e) {
-			
-		}
-		try {
-			vehiculo=new Vehiculo(descripcion, "CO-1234-ABC");
-			fail("Deberia no valer el formato");
-		} catch (MatriculaVehiculoException e) {
-			
-		}
-		try {
-			vehiculo=new Vehiculo(descripcion, "CO-124-ABC");
-			fail("Deberia no valer el formato");
-		} catch (MatriculaVehiculoException e) {
-			
-		}
-		//Correctos
-		try {
-			vehiculo=new Vehiculo(descripcion, "1234-ABC");
-			
-		} catch (MatriculaVehiculoException e) {
-			fail("Deberia  valer el formato");
-		}
-		try {
-			vehiculo=new Vehiculo(descripcion, "CO-1234-AB");
-			
-		} catch (MatriculaVehiculoException e) {
-			fail("Deberia  valer el formato");
-		}
-		try {
-			vehiculo=new Vehiculo(descripcion, "ab-2345-AC");
-			
-		} catch (MatriculaVehiculoException e) {
-			fail("Deberia  valer el formato");
 		}
 
 	}
