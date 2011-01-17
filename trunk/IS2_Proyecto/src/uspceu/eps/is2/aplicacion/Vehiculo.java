@@ -21,6 +21,7 @@ public class Vehiculo {
 	
 	public Vehiculo(String descripcion,String matricula) throws MatriculaVehiculoException{
 		
+		if(matricula.length()<1) throw new MatriculaVehiculoException("Matrícula vacía");
 		this.ConstruirVehiculoSpain(descripcion, matricula);
 		this.marca ="";
 		this.modelo="";
